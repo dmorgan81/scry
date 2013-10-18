@@ -8,9 +8,15 @@
         "48" : "img/icon-48.png",
         "128" : "img/icon-128.png"
     },
+    "permissions" : [
+        "notifications",
+        "unlimitedStorage"
+    ],
     "background" : {
         "scripts" : [
-            "js/jquery-2.0.3.min.js"
+            "js/jquery-2.0.3.min.js",
+            "js/jquery.indexeddb-1.0.0.min.js",
+            "js/oracle.js"
         ],
         "persistent" : false
     }
