@@ -3,6 +3,18 @@
     const TEMPLATE = $('<div></div>').load(_.extension.getURL('template.html') + ' .scry'),
           IMAGE_URL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=';
 
+    function prices(card) {
+        return $.Deferred(function(dfd) {
+            _.runtime.sendMessage({
+                type : 'prices',
+                card : card
+            }, function(prices) {
+                if (prices) dfd.resolve(prices);
+                else dfd.reject();
+            });
+        }).promise();
+    }
+
     function oracle(query) {
         return $.Deferred(function(dfd) {
             query.type = 'oracle';

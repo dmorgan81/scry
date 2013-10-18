@@ -10,13 +10,16 @@
     },
     "permissions" : [
         "notifications",
-        "unlimitedStorage"
+        "unlimitedStorage",
+        "http://partner.tcgplayer.com/*"
     ],
     "background" : {
         "scripts" : [
             "js/jquery-2.0.3.min.js",
             "js/jquery.indexeddb-1.0.0.min.js",
-            "js/oracle.js"
+            "js/utils.js",
+            "js/oracle.js",
+            "js/prices.js"
         ],
         "persistent" : false
     },

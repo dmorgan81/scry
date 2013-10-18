@@ -32,12 +32,12 @@
                                 card.sets.unshift({
                                     artist : card.artist,
                                     border : card.border || set.border,
-                                    code : set.code,
                                     flavor : card.flavor,
                                     multiverseid : card.multiverseid,
-                                    name : set.name,
                                     number : card.number,
-                                    rarity : card.rarity
+                                    rarity : card.rarity,
+                                    setcode : set.code,
+                                    setname : set.name
                                 });
                                 card.multiverseids = existing.multiverseids || [];
                                 card.multiverseids.unshift(card.multiverseid);
@@ -72,9 +72,9 @@
     _.runtime.onMessage.addListener(function(msg, sender, respond) {
         function select(card) {
             var set = card.sets[0];
-            if (msg.set) {
+            if (msg.setcode) {
                 $.each(card.sets, function(i, s) {
-                    if (s.set === msg.set) {
+                    if (s.setcode === msg.setcode) {
                         set = s;
                         return false;
                     }
@@ -84,7 +84,6 @@
         };
         function prune(card) {
             delete card.multiverseids;
-            delete card.names;
             return card;
         };
 
