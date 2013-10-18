@@ -19,5 +19,8 @@
             "js/oracle.js"
         ],
         "persistent" : false
-    }
+    },
+    "web_accessible_resources" : [
+        "template.html"
+    ]
 }
