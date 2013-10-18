@@ -1,0 +1,4 @@
+chrome-release.*
+*.zip
+*.git*
+*.bak
