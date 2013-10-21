@@ -39,7 +39,14 @@
     }
 
     function hide() {
-        $(this).data('scry').fadeOut(300);
+        var timeout = window.setTimeout($.proxy(function() {
+            $(this).data('scry').fadeOut(300);
+        }, this), 500);
+        $(this).data('scry-timeout', timeout);
+    }
+
+    function clearTimeout() {
+        window.clearTimeout($(this).data('scry-timeout'));
     }
 
     function construct(card) {
@@ -56,6 +63,8 @@
     function attach(scry) {
         $(this).data('scry', scry); // replace scry data
         $(this).on('mouseenter.scry', show).on('mouseleave.scry', hide);
+        scry.on('mouseenter.scry', $.proxy(clearTimeout, this))
+            .on('mouseleave.scry', $.proxy(hide, this));
         return scry;
     }
 
