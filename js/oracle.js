@@ -69,24 +69,36 @@
         });
     });
 
-    _.runtime.onMessage.addListener(function(msg, sender, respond) {
-        function select(card) {
-            var set = card.sets[0];
-            if (msg.setcode) {
-                $.each(card.sets, function(i, s) {
-                    if (s.setcode === msg.setcode) {
-                        set = s;
-                        return false;
-                    }
+    function select(setcode, card) {
+        if (!setcode) return card.sets[0];
+        return $.grep(card.sets, function(set) {
+            return set.setcode === setcode;
+        })[0];
+    };
+
+    function prune(card) {
+        delete card.multiverseids;
+        return card;
+    };
+
+    function other(card) {
+        return $.Deferred(function(dfd) {
+            if (!card.names) {
+                dfd.resolve(card);
+            } else {
+                var other = $.grep(card.names, function(name) {
+                    return name !== card.name;
+                })[0];
+                $.indexedDB('oracle').objectStore('cards', false).get(other).done(function(other) {
+                    $.extend(true, other, select(card.setcode, other));
+                    card.other = prune(other);
+                    dfd.resolve(card);
                 });
             }
-            return set;
-        };
-        function prune(card) {
-            delete card.multiverseids;
-            return card;
-        };
+        }).promise();
+    }
 
+    _.runtime.onMessage.addListener(function(msg, sender, respond) {
         if (msg.type !== 'oracle') return false;
         var store = $.indexedDB('oracle').objectStore('cards', false), query = msg.name;
         if (SPLIT_REGEX.test(msg.name)) {
@@ -96,11 +108,14 @@
             query = msg.multiverseid;
         }
         store.get(query).done(function(card) {
-            if (!card) respond.apply(null, [ ]);
-            else {
-                $.extend(true, card, select(card));
-                respond.apply(null, [ prune(card) ]);
+            if (!card) {
+                respond.apply(null, [ ]);
+                return;
             }
+            $.extend(true, card, select(msg.setcode, card));
+            $.when(other(card)).done(function(card) {
+                respond.apply(null, [ prune(card) ]);
+            });
         });
         return true;
     });

@@ -25,7 +25,17 @@
     width: 185px;
 }
 
-.scry-flip:hover {
+.scry-transform {
+    border-radius: 30px;
+    display: none;
+    height: 17px;
+    left: 11px;
+    position: relative;
+    top: 13px;
+    width: 17px;
+}
+
+.scry-control:hover {
     box-shadow: 0 0 10px 5px #FFD700;
     cursor: pointer;
 }

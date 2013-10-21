@@ -19,6 +19,7 @@
         return $.Deferred(function(dfd) {
             query.type = 'oracle';
             _.runtime.sendMessage(query, function(card) {
+                console.log(card);
                 if (card) dfd.resolve(card);
                 else dfd.reject();
             });
@@ -55,6 +56,22 @@
             .data('scry-flipped', !flipped);
     }
 
+    function transform(card) {
+        var transformed = this.data('scry-transformed');
+        this.transition({
+            duration : 300,
+            perspective : 150,
+            rotateY : (transformed ? '-' : '+') + '=180',
+            complete : function() {
+                this.css({
+                    rotateY : 0,
+                    'background-image' : 'url(' + IMAGE_URL +
+                        (transformed ? card.multiverseid : card.other.multiverseid) + ')'
+                });
+            }
+        }).data('scry-transformed', !transformed);
+    }
+
     function construct(card) {
         var scry = TEMPLATE.find('.scry').clone().data('card', card);
         scry.css({
@@ -65,6 +82,8 @@
         if (card.layout === 'split') scry.addClass('scry-split');
         else if (card.layout === 'flip')
             scry.find('.scry-flip').on('click.scry', $.proxy(flip, scry)).show();
+        else if (card.layout === 'double-faced')
+            scry.find('.scry-transform').on('click.scry', $.proxy(transform, scry, card)).show();
         return scry.appendTo('body');
     }
 
