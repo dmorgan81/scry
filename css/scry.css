@@ -1,6 +1,7 @@
 .scry {
     background: black;
     background-position: center;
+    background-repeat: no-repeat;
     border: 5px solid;
     border-radius: 10px;
     box-shadow: -3px 3px 5px #888888;
@@ -9,6 +10,10 @@
     position: absolute;
     width: 213px;
     z-index: 100;
+}
+
+.scry-template {
+    display: none !important;
 }
 
 .scry-alpha {
@@ -61,4 +66,100 @@
 .scry-split .scry-set {
     left: 270px;
     top: 115px;
+}
+
+.scry-name {
+    border-radius: 5px;
+    height: 16px;
+    left: 11px;
+    position: inherit;
+    top: 13px;
+    width: 189px;
+}
+
+.scry-dfc .scry-name {
+    left: 29px;
+    top: 13px;
+    width: 172px;
+}
+
+.scry-old .scry-name {
+    top: 25px;
+}
+
+.scry-split .scry-name {
+    top: 10px;
+    width: 279px;
+}
+
+.scry-prices {
+    background: lightgrey;
+    display: none;
+    height: 135px;
+    left: 15px;
+    margin: auto;
+    opacity: .8;
+    position: inherit;
+    top: 32px;
+    font-size: 10px;
+    width: 182px;
+}
+
+.scry-old .scry-prices {
+    top: 9px;
+}
+
+.scry-split .scry-prices {
+    left: 12px;
+    top: 27px;
+    width: 275px;
+}
+
+.scry-prices-range {
+    text-align: center;
+    vertical-align: top;
+}
+
+.scry-prices-range>span {
+    display: inline-block;
+    width: 25%;
+}
+
+.scry-price:before {
+    content: '$';
+}
+
+.scry-prices-low {
+    background-color: #FFE6E6;
+}
+
+.scry-prices-mid {
+    background-color: #E6F4FF;
+}
+
+.scry-prices-high {
+    background-color: #D9FCD1;
+}
+
+.scry-prices-link, .scry-vendor-name {
+    cursor: pointer;
+    color: #22229C;
+}
+
+.scry-vendor {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.scry-vendor-name {
+    float: left;
+    margin-right: 3px;
+}
+
+.scry-vendor-price, .scry-vendor-quantity {
+    float: right;
+}
+
+.scry-vendor-quantity:after {
+    content: ' @';
 }

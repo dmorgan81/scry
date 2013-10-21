@@ -62,15 +62,17 @@
             $.when(prices(name, set), vendors(name, set)).done(function(presponse, vresponse) {
                 var pdata = fix(presponse[0]), vdata = fix(vresponse[0]),
                     prices = {
-                        low : price(pdata, 'lowprice'),
-                        mid : price(pdata, 'avgprice'),
-                        high : price(pdata, 'hiprice'),
                         link : extract(pdata),
+                        range : {
+                            low : price(pdata, 'lowprice'),
+                            mid : price(pdata, 'avgprice'),
+                            high : price(pdata, 'hiprice')
+                        },
                         vendors : []
                     };
                 $('supplier', vdata).each(function(i, vendor) {
                     prices.vendors.push({
-                        link : $('name', vendor).text(),
+                        name : $('name', vendor).text(),
                         condition : $('condition', vendor).text(),
                         quantity : parseInt($('qty', vendor).text()),
                         price : price(vendor, 'price'),

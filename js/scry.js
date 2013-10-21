@@ -41,7 +41,10 @@
 
     function hide() {
         var timeout = window.setTimeout($.proxy(function() {
-            $(this).data('scry').fadeOut(300);
+            $(this).data('scry').fadeOut(300).queue(function() {
+                $(this).find('.scry-prices').hide();
+                $(this).dequeue();
+            });
         }, this), 500);
         $(this).data('scry-timeout', timeout);
     }
@@ -78,6 +81,8 @@
                 (card.layout === 'split' ? '&options=rotate90' : '') + ')',
             'border-color' : card.border
         }).toggleClass('scry-alpha', card.setcode === 'LEA');
+        this.find('.scry-prices').slideUp();
+        $.when(prices(card)).done($.proxy(pricesConstruct, this.find('.scry-prices')));
     }
 
     function set(card) {
@@ -89,16 +94,41 @@
         this.data('scry-set-index', ++index);
     }
 
+    function pricesConstruct(prices) {
+        var self = this;
+        self.off('.scry').find('.scry-vendor').filter(':not(.scry-template)').empty();
+        self.find('.scry-prices-link').on('click.scry', function() {
+            window.open(prices.link);
+        });
+        $.each(prices.range, function(prop, value) {
+            self.find('.scry-prices-range .scry-prices-' + prop).text(value);
+        });
+        $.each(prices.vendors, function(i, vendor) {
+            var v = self.find('.scry-vendor.scry-template')
+                .clone().removeClass('scry-template');
+            $.each(vendor, function(prop, value) {
+                v.find('.scry-vendor-' + prop).text(value);
+            });
+            v.find('.scry-vendor-name').on('click.scry', function() {
+                window.open(vendor.link);
+            });
+            self.find('.scry-vendors').append(v);
+        });
+    }
+
     function construct(card) {
         var scry = TEMPLATE.find('.scry').clone().data('card', card);
         content.apply(scry, [ card ]);
 
         if (card.layout === 'flip')
-            scry.find('.scry-flip').on('click.scry', $.proxy(flip, scry)).show();
+            scry.addClass('scry-fc').find('.scry-flip').on('click.scry', $.proxy(flip, scry)).show();
         else if (card.layout === 'double-faced')
-            scry.find('.scry-transform').on('click.scry', $.proxy(transform, scry, card)).show();
+            scry.addClass('scry-dfc').find('.scry-transform').on('click.scry', $.proxy(transform, scry, card)).show();
 
         scry.find('.scry-set').on('click.scry', $.proxy(set, scry, card)).toggle(card.sets.length > 1);
+        scry.find('.scry-name').on('click.scry', function() {
+            scry.find('.scry-prices').slideToggle();
+        });
         return scry.toggleClass('scry-split', card.layout === 'split').appendTo('body');
     }
 
