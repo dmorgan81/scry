@@ -72,19 +72,34 @@
         }).data('scry-transformed', !transformed);
     }
 
-    function construct(card) {
-        var scry = TEMPLATE.find('.scry').clone().data('card', card);
-        scry.css({
+    function content(card) {
+        this.css({
             'background-image' : 'url(' + IMAGE_URL + card.multiverseid +
                 (card.layout === 'split' ? '&options=rotate90' : '') + ')',
             'border-color' : card.border
-        });
-        if (card.layout === 'split') scry.addClass('scry-split');
-        else if (card.layout === 'flip')
+        }).toggleClass('scry-alpha', card.setcode === 'LEA');
+    }
+
+    function set(card) {
+        if (card.sets.length === 0) return;
+        var index = this.data('scry-set-index') || 1;
+        if (index >= card.sets.length) index = 0;
+        $.extend(card, card.sets[index]);
+        content.apply(this, [ card ]);
+        this.data('scry-set-index', ++index);
+    }
+
+    function construct(card) {
+        var scry = TEMPLATE.find('.scry').clone().data('card', card);
+        content.apply(scry, [ card ]);
+
+        if (card.layout === 'flip')
             scry.find('.scry-flip').on('click.scry', $.proxy(flip, scry)).show();
         else if (card.layout === 'double-faced')
             scry.find('.scry-transform').on('click.scry', $.proxy(transform, scry, card)).show();
-        return scry.appendTo('body');
+
+        scry.find('.scry-set').on('click.scry', $.proxy(set, scry, card)).toggle(card.sets.length > 1);
+        return scry.toggleClass('scry-split', card.layout === 'split').appendTo('body');
     }
 
     function attach(scry) {

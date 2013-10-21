@@ -11,6 +11,10 @@
     z-index: 100;
 }
 
+.scry-alpha {
+    border-radius: 15px;
+}
+
 .scry-split {
     height: 213px;
     width: 300px;
@@ -38,4 +42,23 @@
 .scry-control:hover {
     box-shadow: 0 0 10px 5px #FFD700;
     cursor: pointer;
+}
+
+.scry-set {
+    border-radius: 5px;
+    height: 20px;
+    left: 178px;
+    position: relative;
+    top: 164px;
+    width: 20px;
+}
+
+.scry-old .scry-set {
+    left: 177px;
+    top: 161px;
+}
+
+.scry-split .scry-set {
+    left: 270px;
+    top: 115px;
 }
