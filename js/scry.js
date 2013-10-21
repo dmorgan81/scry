@@ -45,9 +45,11 @@
     function construct(card) {
         var scry = TEMPLATE.find('.scry').clone().data('card', card);
         scry.css({
-            'background-image' : 'url(' + IMAGE_URL + card.multiverseid + ')',
+            'background-image' : 'url(' + IMAGE_URL + card.multiverseid +
+                (card.layout === 'split' ? '&options=rotate90' : '') + ')',
             'border-color' : card.border
         });
+        if (card.layout === 'split') scry.addClass('scry-split');
         return scry.appendTo('body');
     }
 
