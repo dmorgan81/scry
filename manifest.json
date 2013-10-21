@@ -23,6 +23,93 @@
         ],
         "persistent" : false
     },
+    "content_scripts" : [
+        {
+            "matches" : [
+                "http://*.mtgsalvation.com/*"
+            ],
+            "css" : [
+                "css/scry.css"
+            ],
+            "js" : [
+                "js/jquery-2.0.3.min.js",
+                "js/scry.js",
+                "js/site/mtgsalvation.js"
+            ],
+            "run_at" : "document_end"
+        },
+        {
+            "matches" : [
+                "http://*.wizards.com/magic/magazine/*",
+                "http://*.wizards.com/Magic/Magazine/*"
+            ],
+            "css" : [
+                "css/scry.css"
+            ],
+            "js" : [
+                "js/jquery-2.0.3.min.js",
+                "js/scry.js",
+                "js/site/dailymtg.js"
+            ],
+            "run_at" : "document_end"
+        },
+        {
+            "matches" : [
+                "http://*.starcitygames.com/article/*"
+            ],
+            "css" : [
+                "css/scry.css"
+            ],
+            "js" : [
+                "js/jquery-2.0.3.min.js",
+                "js/scry.js",
+                "js/site/starcitygames.js"
+            ],
+            "run_at" : "document_end"
+        },
+        {
+            "matches" : [
+                "http://*.gatheringmagic.com/*"
+            ],
+            "css" : [
+                "css/scry.css"
+            ],
+            "js" : [
+                "js/jquery-2.0.3.min.js",
+                "js/scry.js",
+                "js/site/gatheringmagic.js"
+            ],
+            "run_at" : "document_end"
+        },
+        {
+            "matches" : [
+                "http://*.channelfireball.com/articles/*"
+            ],
+            "css" : [
+                "css/scry.css"
+            ],
+            "js" : [
+                "js/jquery-2.0.3.min.js",
+                "js/scry.js",
+                "js/site/channelfireball.js"
+            ],
+            "run_at" : "document_end"
+        },
+        {
+            "matches" : [
+                "http://*.gatheringmagic.com/*"
+            ],
+            "css" : [
+                "css/scry.css"
+            ],
+            "js" : [
+                "js/jquery-2.0.3.min.js",
+                "js/scry.js",
+                "js/site/gatheringmagic.js"
+            ],
+            "run_at" : "document_end"
+        }
+    ],
     "web_accessible_resources" : [
         "template.html"
     ]
