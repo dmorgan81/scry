@@ -16,3 +16,16 @@
     width: 300px;
 }
 
+.scry-flip {
+    display: none;
+    height: 100px;
+    margin: auto;
+    position: relative;
+    top: 95px;
+    width: 185px;
+}
+
+.scry-flip:hover {
+    box-shadow: 0 0 10px 5px #FFD700;
+    cursor: pointer;
+}

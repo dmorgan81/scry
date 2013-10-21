@@ -33,6 +33,7 @@
             ],
             "js" : [
                 "js/jquery-2.0.3.min.js",
+                "js/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/mtgsalvation.js"
             ],
@@ -48,6 +49,7 @@
             ],
             "js" : [
                 "js/jquery-2.0.3.min.js",
+                "js/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/dailymtg.js"
             ],
@@ -62,6 +64,7 @@
             ],
             "js" : [
                 "js/jquery-2.0.3.min.js",
+                "js/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/starcitygames.js"
             ],
@@ -76,6 +79,7 @@
             ],
             "js" : [
                 "js/jquery-2.0.3.min.js",
+                "js/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/gatheringmagic.js"
             ],
@@ -90,6 +94,7 @@
             ],
             "js" : [
                 "js/jquery-2.0.3.min.js",
+                "js/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/channelfireball.js"
             ],
@@ -104,6 +109,7 @@
             ],
             "js" : [
                 "js/jquery-2.0.3.min.js",
+                "js/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/gatheringmagic.js"
             ],

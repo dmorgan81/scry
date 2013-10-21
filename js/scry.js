@@ -49,6 +49,12 @@
         window.clearTimeout($(this).data('scry-timeout'));
     }
 
+    function flip() {
+        var flipped = this.data('scry-flipped');
+        this.transition({ rotate : (flipped ? '-' : '+') + '=180' })
+            .data('scry-flipped', !flipped);
+    }
+
     function construct(card) {
         var scry = TEMPLATE.find('.scry').clone().data('card', card);
         scry.css({
@@ -57,6 +63,8 @@
             'border-color' : card.border
         });
         if (card.layout === 'split') scry.addClass('scry-split');
+        else if (card.layout === 'flip')
+            scry.find('.scry-flip').on('click.scry', $.proxy(flip, scry)).show();
         return scry.appendTo('body');
     }
 
