@@ -8,7 +8,9 @@
         });
     }
 
-    $('a.card_popup').scry();
+    $('#content').scry({
+        selector : 'a.card_popup, .deck_card_wrapper a[rel]'
+    });
 
     new MutationObserver(mutate).observe($('body')[0], { childList : true });
 })(jQuery);

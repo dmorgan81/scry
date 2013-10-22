@@ -1,11 +1,12 @@
 (function($, undefined) {
 
-    $('a.nodec').scry({
+    $('#content').scry({
         query : function() {
             return $(this).attr('keyvalue').replace(/_|\[/g, function(m) {
                 return m === '_' ? ' ' : '\'';
             });
-        }
-    }).removeAttr('onmouseover');
+        },
+        selector : 'a.nodec'
+    }).find('a.nodec').removeAttr('onmouseover');
 
 })(jQuery);

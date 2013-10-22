@@ -133,7 +133,7 @@
     }
 
     function attach(scry) {
-        $(this).data('scry', scry); // replace scry data
+        $(this).data('scry', scry);
         $(this).on('mouseenter.scry', show).on('mouseleave.scry', hide);
         scry.on('mouseenter.scry', $.proxy(clearTimeout, this))
             .on('mouseleave.scry', $.proxy(hide, this));
@@ -141,12 +141,10 @@
     }
 
     function init(e) {
-        $(this).off('.scry');
-        var query = $(this).data('scry').settings.query.apply(this);
+        var query = e.data.query.apply(this);
         if (!query) return;
         if (typeof query === 'string') query = { name : query };
         else if (typeof query === 'number') query = { multiverseid : query };
-        $(this).data('scry').query = query;
         $.when(oracle(query))
             .then(construct)
             .then($.proxy(attach, this))
@@ -155,10 +153,15 @@
 
     $.fn.scry = function(options) {
         var settings = $.extend({
-            query : function() { return $(this).text() }
+            query : function() { return $(this).text() },
+            selector : null
         }, options);
         return this.each(function() {
-            $(this).data('scry', { settings : settings }).on('mouseover.scry', init);
+            $(this).on('mouseover.scry', settings.selector, settings,
+                function(e) {
+                    if ($(this).data('scry')) return;
+                    init.apply(this, [ e ]);
+                });
         });
     }
 

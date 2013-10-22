@@ -1,5 +1,7 @@
 (function($, undefined) {
 
-    $('a.jTip, span.cardname>a').scry();
+    $('#left-area').scry({
+        selector : 'a.jTip, span.cardname>a'
+    });
 
 })(jQuery);
