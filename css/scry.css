@@ -13,6 +13,10 @@
     z-index: 100;
 }
 
+.scry * {
+    font-family: sans-serif !important;
+}
+
 .scry-template {
     display: none !important;
 }

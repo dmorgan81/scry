@@ -17,7 +17,7 @@
                         1 : function(transaction) {
                             transaction.createObjectStore('cards', {
                                 autoIncrement : false,
-                                keyPath : 'name'
+                                keyPath : 'queryname'
                             }).createIndex('multiverseids', {
                                 multiEntry : true
                             });
@@ -28,6 +28,7 @@
                         $.each(sets, function(i, set) {
                             $.each(set.cards, function (j, card) {
                                 var existing = cards[card.name] || {};
+                                card.queryname = card.name.toUpperCase();
                                 card.sets = existing.sets || [];
                                 card.sets.unshift({
                                     artist : card.artist,
@@ -78,6 +79,7 @@
 
     function prune(card) {
         delete card.multiverseids;
+        delete card.queryname;
         return card;
     };
 
@@ -89,7 +91,7 @@
                 var other = $.grep(card.names, function(name) {
                     return name !== card.name;
                 })[0];
-                $.indexedDB('oracle').objectStore('cards', false).get(other).done(function(other) {
+                $.indexedDB('oracle').objectStore('cards', false).get(other.toUpperCase()).done(function(other) {
                     $.extend(true, other, select(card.setcode, other));
                     card.other = prune(other);
                     dfd.resolve(card);
@@ -100,9 +102,9 @@
 
     _.runtime.onMessage.addListener(function(msg, sender, respond) {
         if (msg.type !== 'oracle') return false;
-        var store = $.indexedDB('oracle').objectStore('cards', false), query = msg.name;
+        var store = $.indexedDB('oracle').objectStore('cards', false), query = msg.name.toUpperCase();
         if (SPLIT_REGEX.test(msg.name)) {
-            query = SPLIT_REGEX.exec(msg.name)[1];
+            query = SPLIT_REGEX.exec(msg.name)[1].toUpperCase();
         } else if (msg.multiverseid) {
             store = store.index('multiverseids');
             query = msg.multiverseid;
