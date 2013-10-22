@@ -10,7 +10,7 @@
             message : 'Please wait...',
             iconUrl : 'img/icon-128.png'
         }, function (nid) {
-            $.getJSON('sets.json', function(sets) {
+            $.getJSON('oracle.json', function(sets) {
                 $.indexedDB('oracle', {
                     version : 0,
                     schema : {
