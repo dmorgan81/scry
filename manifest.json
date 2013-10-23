@@ -18,10 +18,18 @@
             "js/jquery-2.0.3.min.js",
             "js/jquery.indexeddb-1.0.0.min.js",
             "js/utils.js",
+            "js/init.js",
             "js/oracle.js",
             "js/prices.js"
         ],
         "persistent" : false
+    },
+    "page_action" : {
+        "default_icon" : {
+            "19" : "img/icon-19.png",
+            "38" : "img/icon-38.png"
+        },
+        "default_title" : "Scry"
     },
     "content_scripts" : [
         {

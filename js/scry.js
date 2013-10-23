@@ -156,6 +156,8 @@
             query : function() { return $(this).text() },
             selector : null
         }, options);
+
+        _.runtime.sendMessage({ type : 'init' });
         return this.each(function() {
             $(this).on('mouseover.scry', settings.selector, settings,
                 function(e) {
