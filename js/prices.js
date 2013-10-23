@@ -1,7 +1,7 @@
 (function($, _, undefined) {
 
-    const PRICES_URL = 'http://partner.tcgplayer.com/x/phl.asmx/p?pk=MAGCINFO&p={0}&s={1}',
-          VENDOR_URL = 'http://partner.tcgplayer.com/x/pv.asmx/p?pk=MAGCINFO&v=8&p={0}&s={1}',
+    const PRICES_URL = 'http://partner.tcgplayer.com/x/phl.asmx/p?pk=TEST&p={0}&s={1}',
+          VENDOR_URL = 'http://partner.tcgplayer.com/x/pv.asmx/p?pk=TEST&v=8&p={0}&s={1}',
           SPLIT_FORMAT = "{0} // {1}";
 
     function fix(s) {
