@@ -73,7 +73,7 @@
                 $('supplier', vdata).each(function(i, vendor) {
                     prices.vendors.push({
                         name : $('name', vendor).text(),
-                        condition : $('condition', vendor).text(),
+                        condition : $('condition', vendor).text().match(/\b\w/g).join(''),
                         quantity : parseInt($('qty', vendor).text()),
                         price : price(vendor, 'price'),
                         link : extract(vendor)

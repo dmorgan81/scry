@@ -78,6 +78,7 @@
     position: relative;
     top: -5px;
     width: 203px;
+    z-index: 101;
 }
 
 .scry-split .scry-info {
@@ -182,11 +183,15 @@
     width: 20%;
 }
 
-.scry-vendor .scry-vendor-name {
-    text-align: left;
-    width: 60%;
+.scry-vendor .scry-vendor-quantity {
+    width: 10%;
 }
 
-.scry-vendor-quantity:after {
+.scry-vendor .scry-vendor-name {
+    text-align: left;
+    width: 50%;
+}
+
+.scry-vendor .scry-vendor-condition:after {
     content: ' @';
 }
