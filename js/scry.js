@@ -42,7 +42,7 @@
     function hide() {
         var timeout = window.setTimeout($.proxy(function() {
             $(this).data('scry').fadeOut(300).queue(function() {
-                $(this).find('.scry-prices').hide();
+                $(this).find('.scry-info').hide();
                 $(this).dequeue();
             });
         }, this), 500);
@@ -81,7 +81,7 @@
                 (card.layout === 'split' ? '&options=rotate90' : '') + ')',
             'border-color' : card.border
         }).toggleClass('scry-alpha', card.setcode === 'LEA');
-        this.find('.scry-prices').slideUp();
+        this.find('.scry-info').slideUp();
         $.when(prices(card)).done($.proxy(pricesConstruct, this.find('.scry-prices')));
     }
 
@@ -96,7 +96,7 @@
 
     function pricesConstruct(prices) {
         var self = this;
-        self.off('.scry').find('.scry-vendor').filter(':not(.scry-template)').empty();
+        self.find('.scry-vendor').filter(':not(.scry-template)').empty();
         self.find('.scry-prices-link').on('click.scry', function() {
             window.open(prices.link);
         });
@@ -121,13 +121,17 @@
         content.apply(scry, [ card ]);
 
         if (card.layout === 'flip')
-            scry.addClass('scry-fc').find('.scry-flip').on('click.scry', $.proxy(flip, scry)).show();
+            scry.find('.scry-flip').on('click.scry', $.proxy(flip, scry)).show();
         else if (card.layout === 'double-faced')
-            scry.addClass('scry-dfc').find('.scry-transform').on('click.scry', $.proxy(transform, scry, card)).show();
+            scry.find('.scry-transform').on('click.scry', $.proxy(transform, scry, card)).show();
 
-        scry.find('.scry-set').on('click.scry', $.proxy(set, scry, card)).toggle(card.sets.length > 1);
-        scry.find('.scry-name').on('click.scry', function() {
-            scry.find('.scry-prices').slideToggle();
+        scry.find('.scry-info-toggle').on('click.scry', function() {
+            scry.find('.scry-info').slideToggle();
+        });
+        scry.find('.scry-tabs>li').on('click.scry', function() {
+            $(this).addClass('scry-active').siblings().removeClass('scry-active');
+            scry.find('.scry-panels .scry-' + $(this).text().toLowerCase()).show()
+                .siblings().hide();
         });
         return scry.toggleClass('scry-split', card.layout === 'split').appendTo('body');
     }

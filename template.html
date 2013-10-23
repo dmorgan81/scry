@@ -2,23 +2,37 @@
 <html>
 <body>
     <div class="scry">
-        <div class="scry-flip scry-control"></div>
-        <div class="scry-transform scry-control"></div>
-        <div class="scry-set scry-control"></div>
-        <div class="scry-name scry-control"></div>
-        <div class="scry-prices">
-            <div class="scry-prices-range">
-                <span class="scry-prices-low scry-price"></span><span class="scry-prices-mid scry-price"></span><span class="scry-prices-high scry-price"></span><span class="scry-prices-link">[Details]</span>
-            </div>
-            <div class="scry-vendors">
-                <div class="scry-vendor scry-template">
-                    <div class="scry-vendor-name"></div>
-                    <div class="scry-vendor-price scry-price"></div>
-                    <div class="scry-vendor-quantity"></div>
-                    <br/>
+        <div class="scry-info-toggle"></div>
+        <div class="scry-info">
+            <ul class="scry-tabs"><!--
+                --><li class="scry-active">Oracle</li><!--
+                --><li>Rulings</li><!--
+                --><li>Printings</li><!--
+                --><li>Prices</li>
+            </ul>
+            <div class="scry-panels">
+                <div class="scry-oracle"></div>
+                <div class="scry-rulings"></div>
+                <div class="scry-printings"></div>
+                <div class="scry-prices">
+                    <ul class="scry-prices-range"><!--
+                        --><li class="scry-prices-low scry-price"></li><!--
+                        --><li class="scry-prices-mid scry-price"></li><!--
+                        --><li class="scry-prices-high scry-price"></li><!--
+                        --><li class="scry-prices-link">[Details]</li>
+                    </ul>
+                    <div class="scry-vendors">
+                        <ul class="scry-vendor scry-template"><!--
+                            --><li class="scry-vendor-name"></li><!--
+                            --><li class="scry-vendor-quantity"></li><!--
+                            --><li class="scry-vendor-price scry-price"></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="scry-flip scry-control"></div>
+        <div class="scry-transform scry-control"></div>
     </div>
 </body>
 </html>
