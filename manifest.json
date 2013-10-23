@@ -9,6 +9,7 @@
         "128" : "img/icon-128.png"
     },
     "permissions" : [
+        "contextMenus",
         "notifications",
         "unlimitedStorage",
         "http://partner.tcgplayer.com/*"
@@ -19,6 +20,7 @@
             "js/jquery.indexeddb-1.0.0.min.js",
             "js/utils.js",
             "js/init.js",
+            "js/menu.js",
             "js/oracle.js",
             "js/prices.js"
         ],

@@ -151,6 +151,15 @@
             .done($.proxy(show, this, e));
     }
 
+    function receive(msg) {
+        var temp = $('<div></div>'),
+            e = $('body').data('scry-event');
+        $.when(oracle(msg))
+            .then(construct)
+            .then($.proxy(attach, temp))
+            .done($.proxy(show, temp, e));
+    }
+
     $.fn.scry = function(options) {
         var settings = $.extend({
             query : function() { return $(this).text() },
@@ -158,6 +167,10 @@
         }, options);
 
         _.runtime.sendMessage({ type : 'init' });
+        _.runtime.onMessage.addListener(receive);
+        $('body').on('mouseup', function(e) {
+            $(this).data('scry-event', e);
+        });
         return this.each(function() {
             $(this).on('mouseover.scry', settings.selector, settings,
                 function(e) {
@@ -166,5 +179,6 @@
                 });
         });
     }
+
 
 })(jQuery, chrome);
