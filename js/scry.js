@@ -94,8 +94,22 @@
             'border-color' : card.border
         }).toggleClass('scry-alpha', card.setcode === 'LEA');
         $.when(prices(card)).done($.proxy(pricesConstruct, this.find('.scry-prices')));
+        oracleConstruct.apply(this.find('.scry-oracle'), [ card ]);
         rulingsConstruct.apply(this.find('.scry-rulings'), [ card ]);
         printingsConstruct.apply(this.find('.scry-printings'), [ card ]);
+    }
+
+    function oracleConstruct(card) {
+        var self = this;
+        self.find('div').empty();
+        $.each(card, function(prop, value) {
+            var s = self.find('.scry-oracle-' + prop);
+            if (prop === 'text') value = value.replace(/\n/g, '<BR/>');
+            s.html(value);
+        });
+        $.each([ 'power', 'toughness', 'loyalty' ], function(i, prop) {
+            if (!card[prop]) self.find('.scry-oracle-' + prop).remove();
+        });
     }
 
     function pricesConstruct(prices) {

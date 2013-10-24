@@ -120,22 +120,23 @@
     background: lightgrey;
     display: none;
     height: 260px;
-    padding: 5px 0;
-    width: 100%;
+    padding: 5px;
+    width: 193px;
+}
+
+.scry-panels ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .scry-split .scry-panels>div {
     height: 173px;
+    width: 280px;
 }
 
 .scry-price:before {
     content: '$';
-}
-
-.scry-prices ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
 .scry-prices-range {
@@ -165,11 +166,7 @@
 }
 
 .scry-vendors {
-    margin: 5px;
-}
-
-.scry-vendor.scry-template {
-    display: none !important;
+    margin-top: 5px;
 }
 
 .scry-vendor:nth-child(odd) {
@@ -199,18 +196,8 @@
     opacity: 0.8;
 }
 
-.scry-panels .scry-oracle {
-    display: block;
-}
-
 .scry-rulings {
     overflow: auto;
-}
-
-.scry-rulings ul {
-    list-style: none;
-    margin: 0;
-    padding: 0 5px;
 }
 
 .scry-ruling-date {
@@ -223,12 +210,6 @@
 
 .scry-printings {
     overflow: auto;
-}
-
-.scry-printings ul {
-    list-style: none;
-    margin: 0;
-    padding: 0 5px;
 }
 
 .scry-printing {
@@ -253,4 +234,42 @@
 
 .scry-printing-rarity:after {
     content: ')';
+}
+
+.scry-panels .scry-oracle {
+    display: block;
+    overflow: auto;
+}
+
+.scry-oracle-name {
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.scry-oracle-manaCost {
+    float: right;
+}
+
+.scry-oracle-type {
+    clear: both;
+}
+
+.scry-oracle-flavor {
+    font-style: italic;
+}
+
+.scry-oracle-power,
+.scry-oracle-toughness,
+.scry-oracle-loyalty {
+    display: inline-block;
+    float: right;
+}
+
+.scry-oracle-power:after {
+    content: '/';
+}
+
+.scry-oracle-artist:before {
+    content: 'Illus. ';
 }
