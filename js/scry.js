@@ -96,9 +96,16 @@
             'border-color' : card.border
         }).toggleClass('scry-alpha', card.setcode === 'LEA');
         $.when(prices(card)).done($.proxy(pricesConstruct, this.find('.scry-prices')));
-        oracleConstruct.apply(this.find('.scry-oracle'), [ card ]);
+        this.find('.scry-oracle.scry-right').remove();
+        oracleConstruct.apply(this.find('.scry-oracle').removeClass('scry-left'), [ card ]);
         rulingsConstruct.apply(this.find('.scry-rulings'), [ card ]);
         printingsConstruct.apply(this.find('.scry-printings'), [ card ]);
+
+        if (card.layout === 'split') {
+            var other = this.find('.scry-oracle').clone().addClass('scry-right');
+            oracleConstruct.apply(other, [ card.other ]);
+            this.find('.scry-oracle').addClass('scry-left').after(other);
+        }
     }
 
     function oracleConstruct(card) {
@@ -184,9 +191,10 @@
             scry.find('.scry-info').slideToggle();
         });
         scry.find('.scry-tabs>li').on('click.scry', function() {
+            var type = $(this).text().toLowerCase();
             $(this).addClass('scry-active').siblings().removeClass('scry-active');
-            scry.find('.scry-panels .scry-' + $(this).text().toLowerCase()).show()
-                .siblings().hide();
+            scry.find('.scry-panels .scry-' + type).show()
+                .siblings().filter(':not(.scry-' + type + ')').hide();
         });
         return scry.toggleClass('scry-split', card.layout === 'split').appendTo('body');
     }

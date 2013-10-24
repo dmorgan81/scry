@@ -273,3 +273,18 @@
 .scry-oracle-artist:before {
     content: 'Illus. ';
 }
+
+.scry-split .scry-oracle.scry-left,
+.scry-split .scry-oracle.scry-right {
+    width: 134px;
+}
+
+.scry-split .scry-left {
+    border-right: 1px solid darkgrey;
+    float: left;
+}
+
+.scry-split .scry-right {
+    border-left: 1px solid darkgrey;
+    float: right;
+}
