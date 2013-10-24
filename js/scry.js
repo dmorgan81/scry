@@ -81,9 +81,9 @@
                 (card.layout === 'split' ? '&options=rotate90' : '') + ')',
             'border-color' : card.border
         }).toggleClass('scry-alpha', card.setcode === 'LEA');
-        this.find('.scry-info').slideUp();
         $.when(prices(card)).done($.proxy(pricesConstruct, this.find('.scry-prices')));
         rulingsConstruct.apply(this.find('.scry-rulings'), [ card ]);
+        printingsConstruct.apply(this.find('.scry-printings'), [ card ]);
     }
 
     function pricesConstruct(prices) {
@@ -118,6 +118,26 @@
                 r.find('.scry-ruling-' + prop).text(value);
             });
             rulings.append(r);
+        });
+    }
+
+    function printingsConstruct(card) {
+        var printings = this.find('ul').off('.scry'),
+            template = this.find('.scry-printing.scry-template');
+        printings.find('li').filter(':not(.scry-template)').remove();
+        $.each(card.sets, function(i, set) {
+            var p = template.clone().removeClass('scry-template').data('scry-set', set);
+            $.each(set, function(prop, value) {
+                p.find('.scry-printing-' + prop).text(value);
+            });
+            p.find('.scry-printing-number').toggle(set.number !== undefined);
+            printings.append(p);
+        });
+        printings.on('click.scry', '.scry-printing', function(e) {
+            var set = $(this).data('scry-set');
+            if (set.setcode === card.setcode) return;
+            $.extend(true, card, set);
+            content.apply($(this).parents('.scry'), [ card ]);
         });
     }
 
