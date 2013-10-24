@@ -83,19 +83,11 @@
         }).toggleClass('scry-alpha', card.setcode === 'LEA');
         this.find('.scry-info').slideUp();
         $.when(prices(card)).done($.proxy(pricesConstruct, this.find('.scry-prices')));
-    }
-
-    function set(card) {
-        if (card.sets.length === 0) return;
-        var index = this.data('scry-set-index') || 1;
-        if (index >= card.sets.length) index = 0;
-        $.extend(card, card.sets[index]);
-        content.apply(this, [ card ]);
-        this.data('scry-set-index', ++index);
+        rulingsConstruct.apply(this.find('.scry-rulings'), [ card ]);
     }
 
     function pricesConstruct(prices) {
-        var self = this;
+        var self = this, template = self.find('.scry-vendor.scry-template');
         self.find('.scry-vendor').filter(':not(.scry-template)').empty();
         self.find('.scry-prices-link').on('click.scry', function() {
             window.open(prices.link);
@@ -104,8 +96,7 @@
             self.find('.scry-prices-range .scry-prices-' + prop).text(value);
         });
         $.each(prices.vendors, function(i, vendor) {
-            var v = self.find('.scry-vendor.scry-template')
-                .clone().removeClass('scry-template');
+            var v = template.clone().removeClass('scry-template');
             $.each(vendor, function(prop, value) {
                 v.find('.scry-vendor-' + prop).text(value);
             });
@@ -113,6 +104,20 @@
                 window.open(vendor.link);
             });
             self.find('.scry-vendors').append(v);
+        });
+    }
+
+    function rulingsConstruct(card) {
+        if (!card.rulings) return;
+        var rulings = this.find('ul'),
+            template = this.find('.scry-ruling.scry-template');
+        rulings.find('li').filter(':not(.scry-template)').remove();
+        $.each(card.rulings, function(i, ruling) {
+            var r = template.clone().removeClass('scry-template');
+            $.each(ruling, function(prop, value) {
+                r.find('.scry-ruling-' + prop).text(value);
+            });
+            rulings.append(r);
         });
     }
 

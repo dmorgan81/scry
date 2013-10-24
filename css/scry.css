@@ -111,26 +111,20 @@
     background: lightgrey;
 }
 
-.scry-panels {
+.scry-panels>div {
     background: lightgrey;
-    height: 270px;
+    display: none;
+    height: 260px;
+    padding: 5px 0;
     width: 100%;
 }
 
-.scry-split .scry-panels {
-    height: 183px;
-}
-
-.scry-panels>div {
-    display: none;
+.scry-split .scry-panels>div {
+    height: 173px;
 }
 
 .scry-price:before {
     content: '$';
-}
-
-.scry-prices {
-    padding: 5px 0;
 }
 
 .scry-prices ul {
@@ -194,4 +188,30 @@
 
 .scry-vendor .scry-vendor-condition:after {
     content: ' @';
+}
+
+.scry-panels .scry-printings {
+    opacity: 0.8;
+}
+
+.scry-panels .scry-oracle {
+    display: block;
+}
+
+.scry-rulings {
+    overflow: auto;
+}
+
+.scry-rulings ul {
+    list-style: none;
+    margin: 0;
+    padding: 5px;
+}
+
+.scry-ruling-date {
+    font-weight: bold;
+}
+
+.scry-ruling-date:after {
+    content: ': ';
 }
