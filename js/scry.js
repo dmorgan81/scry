@@ -60,18 +60,24 @@
     }
 
     function transform(card) {
-        var transformed = this.data('scry-transformed');
+        var transformed = this.data('scry-transformed'),
+            op = transformed ? '-' : '+',
+            c = transformed ? card : card.other;
         this.transition({
-            duration : 300,
-            perspective : 150,
-            rotateY : (transformed ? '-' : '+') + '=180',
-            complete : function() {
-                this.css({
-                    rotateY : 0,
-                    'background-image' : 'url(' + IMAGE_URL +
-                        (transformed ? card.multiverseid : card.other.multiverseid) + ')'
-                });
-            }
+            duration : 200,
+            easing : 'in',
+            perspective : 250,
+            rotateY : op + '=90',
+        }).queue(function() {
+            $(this).css({
+                'background-image' : 'url(' + IMAGE_URL + c.multiverseid + ')',
+                scale : [ (transformed ? 1 : -1), 1 ]
+            }).dequeue();
+        }).transition({
+            duration : 200,
+            easing : 'out',
+            perspective : 250,
+            rotateY : op + '=90',
         }).data('scry-transformed', !transformed);
     }
 
