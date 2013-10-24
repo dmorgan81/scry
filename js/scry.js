@@ -53,10 +53,16 @@
         window.clearTimeout($(this).data('scry-timeout'));
     }
 
-    function flip() {
-        var flipped = this.data('scry-flipped');
+    function flip(card) {
+        var flipped = this.data('scry-flipped') || false;
         this.transition({ rotate : (flipped ? '-' : '+') + '=180' })
-            .data('scry-flipped', !flipped);
+            .queue(function() {
+                $(this).css({
+                    'background-image' : 'url(' + IMAGE_URL + card.multiverseid
+                        + (flipped ? '' : '&options=rotate180') + ')',
+                    'rotate' : 0
+                }).toggleClass('scry-flipped', !flipped).dequeue();
+            }).data('scry-flipped', !flipped);
     }
 
     function transform(card) {
@@ -152,7 +158,7 @@
         content.apply(scry, [ card ]);
 
         if (card.layout === 'flip')
-            scry.find('.scry-flip').on('click.scry', $.proxy(flip, scry)).show();
+            scry.find('.scry-flip').on('click.scry', $.proxy(flip, scry, card)).show();
         else if (card.layout === 'double-faced')
             scry.find('.scry-transform').on('click.scry', $.proxy(transform, scry, card)).show();
 

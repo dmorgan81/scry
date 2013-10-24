@@ -36,6 +36,10 @@
     width: 185px;
 }
 
+.scry-flipped .scry-flip {
+    top: 103px;
+}
+
 .scry-transform {
     border-radius: 30px;
     display: none;
@@ -74,9 +78,10 @@
 .scry-info {
     height: 290px;
     display: none;
+    left: 5px;
     margin: auto;
-    position: relative;
-    top: -5px;
+    position: absolute;
+    top: 5px;
     width: 203px;
     z-index: 101;
 }
