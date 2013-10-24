@@ -62,6 +62,7 @@
                         + (flipped ? '' : '&options=rotate180') + ')',
                     'rotate' : 0
                 }).toggleClass('scry-flipped', !flipped).dequeue();
+                oracleConstruct.apply($(this).find('.scry-oracle'), [ flipped ? card : card.other ]);
             }).data('scry-flipped', !flipped);
     }
 
@@ -73,17 +74,18 @@
             duration : 200,
             easing : 'in',
             perspective : 250,
-            rotateY : op + '=90',
+            rotateY : op + '=90'
         }).queue(function() {
             $(this).css({
                 'background-image' : 'url(' + IMAGE_URL + c.multiverseid + ')',
                 scale : [ (transformed ? 1 : -1), 1 ]
             }).dequeue();
+            oracleConstruct.apply($(this).find('.scry-oracle'), [ transformed ? card : card.other ]);
         }).transition({
             duration : 200,
             easing : 'out',
             perspective : 250,
-            rotateY : op + '=90',
+            rotateY : op + '=90'
         }).data('scry-transformed', !transformed);
     }
 
@@ -149,9 +151,11 @@
 
     function printingsConstruct(card) {
         var printings = this.find('ul').off('.scry'),
-            template = this.find('.scry-printing.scry-template');
+            template = this.find('.scry-printing.scry-template'),
+            sets = $.merge([], card.sets);
+        if (card.other) $.merge(sets, card.other.sets);
         printings.find('li').filter(':not(.scry-template)').remove();
-        $.each(card.sets, function(i, set) {
+        $.each(sets, function(i, set) {
             var p = template.clone().removeClass('scry-template').data('scry-set', set);
             $.each(set, function(prop, value) {
                 p.find('.scry-printing-' + prop).text(value);
