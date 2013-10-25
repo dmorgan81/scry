@@ -113,7 +113,9 @@
         self.find('div').empty();
         $.each(card, function(prop, value) {
             var s = self.find('.scry-oracle-' + prop);
-            if (prop === 'text') value = value.replace(/\n/g, '<BR/>');
+            if (prop === 'text') value = value.replace(/\n/g, '<BR/>').replace(/(\(.*\))/g, function(m) {
+                return '<i>' + m + '</i>';
+            });
             s.html(value);
         });
         $.each([ 'power', 'toughness', 'loyalty' ], function(i, prop) {
