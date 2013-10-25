@@ -2,7 +2,7 @@
     "manifest_version" : 2,
     "name" : "Scry",
     "description" : "Rollover popups for Magic: the Gathering sites",
-    "version" : "3.0",
+    "version" : "3.0.1",
     "icons" : {
         "16" : "img/icon-16.png",
         "48" : "img/icon-48.png",
@@ -34,6 +34,21 @@
         "default_title" : "Scry"
     },
     "content_scripts" : [
+        {
+            "matches" : [
+                "http://spitemare.github.io/scry/"
+            ],
+            "css" : [
+                "css/scry.css"
+            ],
+            "js" : [
+                "js/jquery-2.0.3.min.js",
+                "js/jquery.transit-0.9.9.min.js",
+                "js/scry.js",
+                "js/site/scry.js"
+            ],
+            "run_at" : "document_end"
+        },
         {
             "matches" : [
                 "http://*.mtgsalvation.com/*"
