@@ -253,3 +253,7 @@ footer {
     color:#444;
   }
 }
+
+#test-p {
+    display: none;
+}
