@@ -14,10 +14,6 @@
     z-index: 100;
 }
 
-.scry-template {
-    display: none !important;
-}
-
 .scry-alpha {
     border-radius: 15px;
 }

@@ -1,6 +1,6 @@
 (function($, _, undefined) {
 
-    const TEMPLATE = $('<div></div>').load(_.extension.getURL('template.html') + ' .scry'),
+    const TEMPLATES = $('<div></div>').load(_.extension.getURL('template.html')),
           IMAGE_URL = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=';
 
     function prices(card) {
@@ -125,8 +125,8 @@
     }
 
     function pricesConstruct(prices) {
-        var self = this, template = self.find('.scry-vendor.scry-template');
-        self.find('.scry-vendor').filter(':not(.scry-template)').empty();
+        var self = this, template = TEMPLATES.find('.scry-vendor');
+        self.find('.scry-vendor').empty();
         self.find('.scry-prices-link').on('click.scry', function() {
             window.open(prices.link);
         });
@@ -134,7 +134,7 @@
             self.find('.scry-prices-range .scry-prices-' + prop).text(value);
         });
         $.each(prices.vendors, function(i, vendor) {
-            var v = template.clone().removeClass('scry-template');
+            var v = template.clone().data('scry-vendor', vendor);
             $.each(vendor, function(prop, value) {
                 v.find('.scry-vendor-' + prop).text(value);
             });
@@ -148,10 +148,10 @@
     function rulingsConstruct(card) {
         if (!card.rulings) return;
         var rulings = this.find('ul'),
-            template = this.find('.scry-ruling.scry-template');
-        rulings.find('li').filter(':not(.scry-template)').remove();
+            template = TEMPLATES.find('.scry-ruling');
+        rulings.find('li').remove();
         $.each(card.rulings, function(i, ruling) {
-            var r = template.clone().removeClass('scry-template');
+            var r = template.clone().data('scry-ruling', ruling);
             $.each(ruling, function(prop, value) {
                 r.find('.scry-ruling-' + prop).text(value);
             });
@@ -161,12 +161,12 @@
 
     function printingsConstruct(card) {
         var printings = this.find('ul').off('.scry'),
-            template = this.find('.scry-printing.scry-template'),
+            template = TEMPLATES.find('.scry-printing'),
             sets = $.merge([], card.sets);
         if (card.other) $.merge(sets, card.other.sets);
-        printings.find('li').filter(':not(.scry-template)').remove();
+        printings.find('li').remove();
         $.each(sets, function(i, set) {
-            var p = template.clone().removeClass('scry-template').data('scry-set', set);
+            var p = template.clone().data('scry-set', set);
             $.each(set, function(prop, value) {
                 p.find('.scry-printing-' + prop).text(value);
             });
@@ -182,7 +182,7 @@
     }
 
     function construct(card) {
-        var scry = TEMPLATE.find('.scry').clone().data('card', card);
+        var scry = TEMPLATES.find('.scry').clone().data('card', card);
         content.apply(scry, [ card ]);
 
         if (card.layout === 'flip')
