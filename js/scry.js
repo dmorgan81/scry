@@ -32,6 +32,7 @@
             b = $(window).width(), s = $(window).scrollTop(),
             x = e.pageX, y = e.pageY,
             cl, ct;
+        $('.scry').fadeOut(300);
         if (b - 15 >= w + x) cl = x + 5;
         else cl = b - w - 15;
         if (s + 20 >= y - h) ct = y + 10;
