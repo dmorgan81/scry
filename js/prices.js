@@ -60,8 +60,13 @@
         if (card.layout === 'split') name = String.prototype.format.apply(SPLIT_FORMAT, card.names);
         $.indexedDB('prices').objectStore('sets', false).get(card.setcode).always(function(set) {
             $.when(prices(name, set), vendors(name, set)).done(function(presponse, vresponse) {
-                var pdata = fix(presponse[0]), vdata = fix(vresponse[0]),
-                    prices = {
+                var pdata = fix(presponse[0]), vdata = fix(vresponse[0]);
+                if ($('product', pdata).length === 0) {
+                    // our reponse from TCGPlayer is actually "not found"
+                    respond.apply(null);
+                    return;
+                }
+                var prices = {
                         link : extract(pdata),
                         range : {
                             low : price(pdata, 'lowprice'),
