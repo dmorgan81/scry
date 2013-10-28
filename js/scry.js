@@ -27,8 +27,7 @@
     }
 
     function show(e) {
-        var scry = $(this).data('scry'),
-            w = scry.width(), h = scry.height(),
+        var w = this.width(), h = this.height(),
             b = $(window).width(), s = $(window).scrollTop(),
             x = e.pageX, y = e.pageY,
             cl, ct;
@@ -37,21 +36,13 @@
         else cl = b - w - 15;
         if (s + 20 >= y - h) ct = y + 10;
         else ct = y - h - 10;
-        scry.css({ left : cl, top : ct }).fadeIn(300);
+        this.clearQueue().css({ left : cl, top : ct }).fadeIn(300);
     }
 
     function hide() {
-        var timeout = window.setTimeout($.proxy(function() {
-            $(this).data('scry').fadeOut(300).queue(function() {
-                $(this).find('.scry-info').hide();
-                $(this).dequeue();
-            });
-        }, this), 500);
-        $(this).data('scry-timeout', timeout);
-    }
-
-    function clearTimeout() {
-        window.clearTimeout($(this).data('scry-timeout'));
+        $(this).delay(500).fadeOut(300).queue(function() {
+            $(this).dequeue().find('.scry-info').hide();
+        });
     }
 
     function flip(card) {
@@ -204,9 +195,10 @@
 
     function attach(scry) {
         $(this).data('scry', scry);
-        $(this).on('mouseenter.scry', show).on('mouseleave.scry', hide);
-        scry.on('mouseenter.scry', $.proxy(clearTimeout, this))
-            .on('mouseleave.scry', $.proxy(hide, this));
+        $(this).on('mouseenter.scry', $.proxy(show, scry))
+               .on('mouseleave.scry', $.proxy(hide, scry));
+        scry.on('mouseenter.scry', function() { $(this).clearQueue() })
+            .on('mouseleave.scry', hide);
         return scry;
     }
 
@@ -218,7 +210,9 @@
         $.when(oracle(query))
             .then(construct)
             .then($.proxy(attach, this))
-            .done($.proxy(show, this, e));
+            .done(function(scry) {
+                show.apply(scry, [ e ]);
+            });
     }
 
     function receive(msg) {
