@@ -48,7 +48,7 @@
     }
 
     function flip(card) {
-        var flipped = this.data('scry-flipped') || false;
+        var flipped = this.data('scry').flipped || false;
         this.transition({ rotate : (flipped ? '-' : '+') + '=180' })
             .queue(function() {
                 $(this).css({
@@ -57,11 +57,12 @@
                     'rotate' : 0
                 }).toggleClass('scry-flipped', !flipped).dequeue();
                 oracleConstruct.apply($(this).find('.scry-oracle'), [ flipped ? card : card.other ]);
-            }).data('scry-flipped', !flipped);
+            });
+        this.data('scry').flipped = !flipped;
     }
 
     function transform(card) {
-        var transformed = this.data('scry-transformed'),
+        var transformed = this.data('scry').transformed || false,
             op = transformed ? '-' : '+',
             c = transformed ? card : card.other;
         this.transition({
@@ -80,7 +81,8 @@
             easing : 'out',
             perspective : 250,
             rotateY : op + '=90'
-        }).data('scry-transformed', !transformed);
+        });
+        this.data('scry').transformed = !transformed;
     }
 
     function content(card) {
@@ -127,7 +129,7 @@
             self.find('.scry-prices-range .scry-prices-' + prop).text(value);
         });
         $.each(prices.vendors, function(i, vendor) {
-            var v = template.clone().data('scry-vendor', vendor);
+            var v = template.clone();
             $.each(vendor, function(prop, value) {
                 v.find('.scry-vendor-' + prop).text(value);
             });
@@ -144,7 +146,7 @@
             template = TEMPLATES.find('.scry-ruling');
         rulings.find('li').remove();
         $.each(card.rulings, function(i, ruling) {
-            var r = template.clone().data('scry-ruling', ruling);
+            var r = template.clone();
             $.each(ruling, function(prop, value) {
                 r.find('.scry-ruling-' + prop).text(value);
             });
@@ -159,7 +161,7 @@
         if (card.other) $.merge(sets, card.other.sets);
         printings.find('li').remove();
         $.each(sets, function(i, set) {
-            var p = template.clone().data('scry-set', set);
+            var p = template.clone().data('scry', set);
             $.each(set, function(prop, value) {
                 p.find('.scry-printing-' + prop).text(value);
             });
@@ -167,7 +169,7 @@
             printings.append(p);
         });
         printings.on('click.scry', '.scry-printing', function(e) {
-            var set = $(this).data('scry-set');
+            var set = $(this).data('scry');
             if (set.setcode === card.setcode) return;
             $.extend(true, card, set);
             content.apply($(this).parents('.scry'), [ card ]);
@@ -175,7 +177,7 @@
     }
 
     function construct(card) {
-        var scry = TEMPLATES.find('.scry').clone().data('card', card);
+        var scry = TEMPLATES.find('.scry').clone().data('scry', {});
         content.apply(scry, [ card ]);
 
         if (card.layout === 'flip')
@@ -196,8 +198,8 @@
     }
 
     function attach(scry) {
-        $(this).data('scry', scry);
-        $(this).on('mouseenter.scry', $.proxy(show, scry))
+        $(this).data('scry', true)
+               .on('mouseenter.scry', $.proxy(show, scry))
                .on('mouseleave.scry', $.proxy(hide, scry));
         scry.on('mouseenter.scry', function() { $(this).clearQueue() })
             .on('mouseleave.scry', hide);
@@ -219,11 +221,13 @@
 
     function receive(msg) {
         var temp = $('<div></div>'),
-            e = $('body').data('scry-event');
+            e = $('body').data('scry');
         $.when(oracle(msg))
             .then(construct)
             .then($.proxy(attach, temp))
-            .done($.proxy(show, temp, e));
+            .done(function(scry) {
+                show.apply(scry, [ e ]);
+            });
     }
 
     $.fn.scry = function(options) {
@@ -235,7 +239,7 @@
         _.runtime.sendMessage({ type : 'init' });
         _.runtime.onMessage.addListener(receive);
         $('body').on('mouseup', function(e) {
-            $(this).data('scry-event', e);
+            $(this).data('scry', e);
         });
         return this.each(function() {
             $(this).on('mouseover.scry', settings.selector, settings,
