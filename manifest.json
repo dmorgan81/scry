@@ -17,8 +17,8 @@
     ],
     "background" : {
         "scripts" : [
-            "js/jquery-2.0.3.min.js",
-            "js/jquery.indexeddb-1.0.0.min.js",
+            "lib/jquery-2.0.3.min.js",
+            "lib/jquery.indexeddb-1.0.0.min.js",
             "js/utils.js",
             "js/init.js",
             "js/menu.js",
@@ -43,8 +43,8 @@
                 "css/scry.css"
             ],
             "js" : [
-                "js/jquery-2.0.3.min.js",
-                "js/jquery.transit-0.9.9.min.js",
+                "lib/jquery-2.0.3.min.js",
+                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/scry.js"
             ],
@@ -58,8 +58,8 @@
                 "css/scry.css"
             ],
             "js" : [
-                "js/jquery-2.0.3.min.js",
-                "js/jquery.transit-0.9.9.min.js",
+                "lib/jquery-2.0.3.min.js",
+                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/mtgsalvation.js"
             ],
@@ -74,8 +74,8 @@
                 "css/scry.css"
             ],
             "js" : [
-                "js/jquery-2.0.3.min.js",
-                "js/jquery.transit-0.9.9.min.js",
+                "lib/jquery-2.0.3.min.js",
+                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/dailymtg.js"
             ],
@@ -89,8 +89,8 @@
                 "css/scry.css"
             ],
             "js" : [
-                "js/jquery-2.0.3.min.js",
-                "js/jquery.transit-0.9.9.min.js",
+                "lib/jquery-2.0.3.min.js",
+                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/starcitygames.js"
             ],
@@ -104,8 +104,8 @@
                 "css/scry.css"
             ],
             "js" : [
-                "js/jquery-2.0.3.min.js",
-                "js/jquery.transit-0.9.9.min.js",
+                "lib/jquery-2.0.3.min.js",
+                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/gatheringmagic.js"
             ],
@@ -119,8 +119,8 @@
                 "css/scry.css"
             ],
             "js" : [
-                "js/jquery-2.0.3.min.js",
-                "js/jquery.transit-0.9.9.min.js",
+                "lib/jquery-2.0.3.min.js",
+                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/channelfireball.js"
             ],
@@ -134,8 +134,8 @@
                 "css/scry.css"
             ],
             "js" : [
-                "js/jquery-2.0.3.min.js",
-                "js/jquery.transit-0.9.9.min.js",
+                "lib/jquery-2.0.3.min.js",
+                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/gatheringmagic.js"
             ],
