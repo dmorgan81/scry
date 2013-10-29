@@ -3,7 +3,7 @@
     "name" : "Scry",
     "description" : "Rollover popups for Magic: the Gathering sites",
     "homepage_url" : "http://spitemare.github.io/scry/",
-    "version" : "3.0.2",
+    "version" : "3.0.3",
     "icons" : {
         "16" : "img/icon-16.png",
         "48" : "img/icon-48.png",

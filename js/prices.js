@@ -38,7 +38,7 @@
         if (!(details.reason === 'install' || details.reason === 'update')) return;
         $.getJSON('prices.json', function(sets) {
             $.indexedDB('prices', {
-                version : 0,
+                version : 2,
                 schema : {
                     1 : function(transaction) {
                         transaction.createObjectStore('sets', { autoIncrement : false });
