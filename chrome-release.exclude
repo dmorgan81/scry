@@ -1,4 +1,7 @@
+Cakefile
 chrome-release.*
 *.zip
 *.git*
 *.bak
+*.map
+src*
