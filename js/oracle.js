@@ -12,7 +12,7 @@
         }, function (nid) {
             $.getJSON('oracle.json', function(sets) {
                 $.indexedDB('oracle', {
-                    version : 0,
+                    version : 2,
                     schema : {
                         1 : function(transaction) {
                             transaction.createObjectStore('cards', {
