@@ -19,7 +19,6 @@
         "scripts" : [
             "lib/jquery-2.0.3.min.js",
             "lib/jquery.indexeddb-1.0.0.min.js",
-            "js/utils.js",
             "js/init.js",
             "js/menu.js",
             "js/oracle.js",
