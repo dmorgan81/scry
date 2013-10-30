@@ -68,7 +68,9 @@
         {
             "matches" : [
                 "http://*.wizards.com/magic/magazine/*",
-                "http://*.wizards.com/Magic/Magazine/*"
+                "http://*.wizards.com/Magic/Magazine/*",
+                "http://*.wizards.com/magic/Magazine/*",
+                "http://*.wizards.com/Magic/magazine/*"
             ],
             "css" : [
                 "css/scry.css"
