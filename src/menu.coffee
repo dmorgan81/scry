@@ -23,8 +23,8 @@ registerContextMenu = ->
         title : "Price '%s'"
         contexts : [ "selection" ]
     }
-    chrome.contextMenus.onClicked.addListener onContextMenu
 
 chrome.runtime.onInstalled.addListener registerContextMenu
 chrome.runtime.onStartup.addListener registerContextMenu
+chrome.contextMenus.onClicked.addListener onContextMenu
     
