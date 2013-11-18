@@ -1,5 +1,5 @@
 templates = $('<div/>').load(chrome.extension.getURL('template.html'))
-imageUrl = (id, ops) -> "url(http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=#{id}&options=#{ops})"
+imageUrl = (card) -> "http://mtgimage.com/set/#{card.setcode}/#{card.image}.jpg"
 
 prices = (card) ->
     $.Deferred((dfd) ->
@@ -42,13 +42,12 @@ hide = ->
 
 flip = (card) ->
     flipped = this.data('scry').flipped ? false
+    c = if flipped then card else card.other
     this.transition({ rotate : (if flipped then '-' else '+') + '=180' })
         .queue =>
-            this.css({
-                'background-image' : imageUrl card.multiverseid, if not flipped then 'rotate180'
-                rotate : 0
-            }).toggleClass('scry-flipped', !flipped).dequeue()
-            oracleConstruct.call this.find('.scry-oracle'), if flipped then card else card.other
+            this.find('.scry-image').attr 'src', imageUrl c
+            this.css('rotate', 0).toggleClass('scry-flipped', !flipped).dequeue()
+            oracleConstruct.call this.find('.scry-oracle'), c
     this.data('scry').flipped = !flipped
 
 transform = (card) ->
@@ -58,26 +57,24 @@ transform = (card) ->
     this.transition({
         duration : 200
         easing : 'in'
-        perspective: 250
+        perspective: 500
         rotateY : op
     }).queue(=>
-        this.css({
-            'background-image' : imageUrl c.multiverseid
-            scale : [ (if transformed then 1 else -1), 1 ]
-        }).dequeue()
+        this.find('.scry-image').attr 'src', imageUrl c
+        this.css('scale', [ (if transformed then 1 else -1), 1 ]).dequeue()
         oracleConstruct.call this.find('.scry-oracle'), if transformed then card else card.other
     ).transition({
         duration : 200
         easing : 'out'
-        perspective : 250
+        perspective : 500
         rotateY : op
-    }).data('scry').transformed = !transformed
+    }).queue(=>
+        this.css('-webkit-transform', '').dequeue()
+    ).data('scry').transformed = !transformed
 
 content = (card) ->
-    this.css({
-        'background-image' : imageUrl card.multiverseid, (if card.layout == 'split' then 'rotate90')
-        'border-color' : card.border
-    }).toggleClass 'scry-alpha', card.setcode == 'LEA'
+    this.css('border-color', card.border).toggleClass 'scry-alpha', card.setcode == 'LEA'
+    this.find('.scry-image').attr 'src', imageUrl card
     $.when(prices(card)).done($.proxy pricesConstruct, this.find('.scry-prices'))
     this.find('.scry-oracle.scry-right').remove()
     oracleConstruct.call this.find('.scry-oracle').removeClass('scry-left'), card

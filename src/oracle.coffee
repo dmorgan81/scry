@@ -24,6 +24,7 @@ processCard = (set, card) ->
         artist : card.artist
         border : card.border ? set.border
         flavor : card.flavor
+        image : card.imageName
         multiverseid : card.multiverseid
         number : card.number
         rarity : card.rarity

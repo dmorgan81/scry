@@ -1,17 +1,28 @@
 .scry {
     background: black;
-    background-position: center;
-    background-repeat: no-repeat;
     border: 5px solid;
     border-radius: 10px;
     box-shadow: -3px 3px 5px #888888;
     color: black;
     display: none;
-    height: 300px;
+    height: 408px;
     line-height: normal;
     position: absolute;
-    width: 213px;
+    width: 288px;
     z-index: 100;
+}
+
+.scry-image {
+    height: 408px;
+    position: relative;
+    top: -10px;
+    width: 288px;
+}
+
+.scry-split .scry-image {
+    -webkit-transform: rotate(90deg);
+    left: 60px;
+    top: -70px;
 }
 
 .scry-alpha {
@@ -19,32 +30,32 @@
 }
 
 .scry-split {
-    height: 213px;
-    width: 300px;
+    height: 288px;
+    width: 408px;
 }
 
 .scry-flip {
     display: none;
-    left: 13px;
-    height: 105px;
+    left: 16px;
+    height: 148px;
     margin: auto;
     position: absolute;
-    top: 93px;
-    width: 185px;
+    top: 123px;
+    width: 254px;
 }
 
 .scry-flipped .scry-flip {
-    top: 103px;
+    top: 137px;
 }
 
 .scry-transform {
     border-radius: 30px;
     display: none;
-    height: 17px;
+    height: 25px;
     left: 11px;
     position: absolute;
     top: 13px;
-    width: 17px;
+    width: 25px;
 }
 
 .scry-control:hover {
@@ -60,37 +71,37 @@
     margin: auto;
     position: relative;
     top: -5px;
-    width: 223px;
+    width: 298px;
 }
 
 .scry-split .scry-info-toggle {
-    width: 310px;
+    width: 418px;
 }
 
 .scry-info-toggle:hover {
-    box-shadow: 0 -2px 2px 1px #FFD700;
+    box-shadow: 0 -3px 10px 2px #FFD700;
     cursor: pointer;
 }
 
 .scry-info {
-    height: 290px;
+    height: 398px;
     display: none;
     left: 5px;
     margin: auto;
     position: absolute;
     top: 5px;
-    width: 203px;
+    width: 278px;
     z-index: 101;
 }
 
 .scry-split .scry-info {
-    height: 203px;
-    width: 290px;
+    height: 278px;
+    width: 398px;
 }
 
 .scry-info * {
     font-family: sans-serif;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .scry-tabs {
@@ -116,9 +127,9 @@
 .scry-panels>div {
     background: lightgrey;
     display: none;
-    height: 260px;
+    height: 368px;
     padding: 5px;
-    width: 193px;
+    width: 268px;
 }
 
 .scry-panels ul {
@@ -128,8 +139,8 @@
 }
 
 .scry-split .scry-panels>div {
-    height: 173px;
-    width: 280px;
+    height: 248px;
+    width: 388px;
 }
 
 .scry-price:before {
@@ -240,7 +251,7 @@
 
 .scry-oracle-name {
     float: left;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -274,7 +285,7 @@
 
 .scry-split .scry-oracle.scry-left,
 .scry-split .scry-oracle.scry-right {
-    width: 134px;
+    width: 188px;
 }
 
 .scry-split .scry-left {
