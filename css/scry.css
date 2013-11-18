@@ -116,6 +116,7 @@
     background: darkgrey;
     cursor: pointer;
     display: inline-block;
+    margin: 0;
     padding: 5px 0px;
     width: 25%;
 }
@@ -153,6 +154,7 @@
 
 .scry-prices-range>li {
     display: inline-block;
+    margin: 0;
     width: 25%;
 }
 
@@ -183,6 +185,7 @@
 
 .scry-vendor>li {
     display: inline-block;
+    margin: 0;
     text-align: right;
     width: 20%;
 }
