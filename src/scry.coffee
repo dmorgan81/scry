@@ -117,7 +117,8 @@ printingsConstruct = (card) ->
             printings.append p
     printings.on 'click.scry', '.scry-printing', (e) ->
         set = $(this).data('scry')
-        return if set.setcode == card.setcode
+        return if set.multiverseid == card.multiverseid
+        return if set.setcode == card.setcode and (card.layout == 'flip' or card.layout == 'double-faced')
         $.extend true, card, set
         content.call $(this).parents('.scry'), card
 
