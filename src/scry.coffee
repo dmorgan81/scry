@@ -114,6 +114,7 @@ printingsConstruct = (card) ->
             for prop, value of set
                 do (prop, value) -> p.find(".scry-printing-#{prop}").text value
             p.find('.scry-printing-number').toggle set.number != undefined
+            if (set.multiverseid == card.multiverseid) then p.addClass 'scry-current-printing'
             printings.append p
     printings.on 'click.scry', '.scry-printing', (e) ->
         set = $(this).data('scry')

@@ -264,6 +264,14 @@
     background: darkgrey;
 }
 
+.scry-printing.scry-current-printing {
+    cursor: default;
+}
+
+.scry-printing.scry-current-printing:before {
+    content: "> ";
+}
+
 .scry-printing-setname {
     font-weight: bold;
 }
