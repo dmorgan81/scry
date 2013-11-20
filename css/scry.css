@@ -1,100 +1,132 @@
 .scry {
-    background: black;
-    border: 5px solid;
-    border-radius: 10px;
-    box-shadow: -3px 3px 5px #888888;
     color: black;
     display: none;
-    height: 408px;
+    height: 418px;
     line-height: normal;
     position: absolute;
-    width: 288px;
+    width: 298px;
     z-index: 100;
+    -webkit-perspective: 1000;
 }
 
-.scry-image {
+.scry.scry-split {
+    height: 298px;
+    width: 418px;
+}
+
+.scry-images {
+    border: 5px solid;
+    box-shadow: -3px 3px 5px #888888;
+    border-radius: 10px;
     height: 408px;
     position: relative;
-    top: -10px;
     width: 288px;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: 0.8s;
 }
 
-.scry-split .scry-image {
-    -webkit-transform: rotate(90deg);
-    left: 60px;
-    top: -70px;
+.scry.scry-split .scry-images {
+    box-shadow: 3px 3px 5px #888888;
 }
 
-.scry-alpha {
+.scry.scry-alpha .scry-images {
     border-radius: 15px;
 }
 
-.scry-split {
-    height: 288px;
-    width: 408px;
+.scry-front, .scry-back {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 408px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 288px;
+    -webkit-backface-visibility: hidden;
 }
 
-.scry-flip {
+.scry-back {
+    -webkit-transform: rotateY(180deg);
+}
+
+.scry.scry-transform .scry-images {
+    -webkit-transform: rotateY(180deg);
+    box-shadow: 3px 3px 5px #888888;
+}
+
+.scry.scry-flip .scry-images {
+    -webkit-transform: rotate(180deg);
+    box-shadow: 3px -3px 5px #888888;
+}
+
+.scry.scry-split .scry-images {
+    -webkit-transform: rotate(90deg);
+    -webkit-transform-origin: 70%;
+}
+
+.scry-flip-control {
     display: none;
-    left: 16px;
+    left: 21px;
     height: 148px;
-    margin: auto;
     position: absolute;
-    top: 123px;
+    top: 128px;
     width: 254px;
 }
 
-.scry-flipped .scry-flip {
-    top: 137px;
+.scry.scry-flip .scry-flip-control {
+    top: 142px;
 }
 
-.scry-transform {
+.scry-transform-control {
     border-radius: 30px;
     display: none;
     height: 25px;
-    left: 11px;
+    left: 16px;
     position: absolute;
-    top: 13px;
+    top: 19px;
     width: 25px;
 }
 
-.scry-control:hover {
+.scry-flip-control:hover, .scry-transform-control:hover {
     box-shadow: 0 0 10px 5px #FFD700;
     cursor: pointer;
+}
+
+.scry-no-hover {
+    box-shadow: none !important;
 }
 
 .scry-info-toggle {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     height: 10px;
-    left: -5px;
+    left: 0;
     margin: auto;
-    position: relative;
-    top: -5px;
+    position: absolute;
+    top: 0;
     width: 298px;
 }
 
-.scry-split .scry-info-toggle {
-    width: 418px;
+.scry-info-toggle:hover {
+    box-shadow: 0 -3px 5px 2px #FFD700;
+    cursor: pointer;
 }
 
-.scry-info-toggle:hover {
-    box-shadow: 0 -3px 10px 2px #FFD700;
-    cursor: pointer;
+.scry.scry-split .scry-info-toggle {
+    width: 418px;
 }
 
 .scry-info {
     height: 398px;
     display: none;
-    left: 5px;
+    left: 10px;
     margin: auto;
     position: absolute;
-    top: 5px;
+    top: 10px;
     width: 278px;
-    z-index: 101;
 }
 
-.scry-split .scry-info {
+.scry.scry-split .scry-info {
     height: 278px;
     width: 398px;
 }

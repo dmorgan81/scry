@@ -3,7 +3,7 @@
     "name" : "Scry",
     "description" : "Rollover popups for Magic: the Gathering sites",
     "homepage_url" : "http://spitemare.github.io/scry/",
-    "version" : "3.2",
+    "version" : "3.3",
     "icons" : {
         "16" : "img/icon-16.png",
         "48" : "img/icon-48.png",
@@ -43,7 +43,6 @@
             ],
             "js" : [
                 "lib/jquery-2.0.3.min.js",
-                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/scry.js"
             ],
@@ -58,7 +57,6 @@
             ],
             "js" : [
                 "lib/jquery-2.0.3.min.js",
-                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/mtgsalvation.js"
             ],
@@ -76,7 +74,6 @@
             ],
             "js" : [
                 "lib/jquery-2.0.3.min.js",
-                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/dailymtg.js"
             ],
@@ -91,7 +88,6 @@
             ],
             "js" : [
                 "lib/jquery-2.0.3.min.js",
-                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/starcitygames.js"
             ],
@@ -106,7 +102,6 @@
             ],
             "js" : [
                 "lib/jquery-2.0.3.min.js",
-                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/gatheringmagic.js"
             ],
@@ -121,7 +116,6 @@
             ],
             "js" : [
                 "lib/jquery-2.0.3.min.js",
-                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/channelfireball.js"
             ],
@@ -136,7 +130,6 @@
             ],
             "js" : [
                 "lib/jquery-2.0.3.min.js",
-                "lib/jquery.transit-0.9.9.min.js",
                 "js/scry.js",
                 "js/site/gatheringmagic.js"
             ],

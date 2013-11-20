@@ -1,5 +1,5 @@
 templates = $('<div/>').load(chrome.extension.getURL('template.html'))
-imageUrl = (card) -> "http://mtgimage.com/set/#{card.setcode}/#{card.image}.jpg"
+imageUrl = (card) -> "url(\"http://mtgimage.com/set/#{card.setcode}/#{card.image}.jpg\")"
 
 prices = (card) ->
     $.Deferred((dfd) ->
@@ -41,41 +41,21 @@ hide = ->
         $(this).dequeue().find('.scry-info').hide()
 
 flip = (card) ->
-    flipped = this.data('scry').flipped ? false
-    c = if flipped then card else card.other
-    this.transition({ rotate : (if flipped then '-' else '+') + '=180' })
-        .queue =>
-            this.find('.scry-image').attr 'src', imageUrl c
-            this.css('rotate', 0).toggleClass('scry-flipped', !flipped).dequeue()
-            oracleConstruct.call this.find('.scry-oracle'), c
-    this.data('scry').flipped = !flipped
+    oracleConstruct.call this.find('.scry-oracle'), if this.hasClass('scry-flip') then card else card.other
+    this.toggleClass('scry-flip').find('.scry-flip-control').addClass('scry-no-hover').delay(800).queue(->
+        $(this).removeClass('scry-no-hover').dequeue()
+    )
 
 transform = (card) ->
-    transformed = this.data('scry').transformed ? false
-    op = (if transformed then '-' else '+') + '=90'
-    c = if transformed then card else card.other
-    this.transition({
-        duration : 200
-        easing : 'in'
-        perspective: 500
-        rotateY : op
-    }).queue(=>
-        this.find('.scry-image').attr 'src', imageUrl c
-        this.css('scale', [ (if transformed then 1 else -1), 1 ]).dequeue()
-        oracleConstruct.call this.find('.scry-oracle'), if transformed then card else card.other
-    ).transition({
-        duration : 200
-        easing : 'out'
-        perspective : 500
-        rotateY : op
-    }).queue(=>
-        this.css('-webkit-transform', '').dequeue()
-    ).data('scry').transformed = !transformed
+    oracleConstruct.call this.find('.scry-oracle'), if this.hasClass('scry-transform') then card else card.other
+    this.toggleClass('scry-transform').find('.scry-transform-control').addClass('scry-no-hover').delay(800).queue(->
+        $(this).removeClass('scry-no-hover').dequeue()
+    )
 
 content = (card) ->
-    this.css('border-color', card.border).toggleClass 'scry-alpha', card.setcode == 'LEA'
-    this.find('.scry-image').attr 'src', imageUrl card
-    $.when(prices(card)).done($.proxy pricesConstruct, this.find('.scry-prices'))
+    this.toggleClass 'scry-alpha', card.setcode == 'LEA'
+    this.find('.scry-images').css('border-color', card.border).find('.scry-front').css 'background-image', imageUrl card
+    $.when(prices(card)).done $.proxy pricesConstruct, this.find('.scry-prices')
     this.find('.scry-oracle.scry-right').remove()
     oracleConstruct.call this.find('.scry-oracle').removeClass('scry-left'), card
     rulingsConstruct.call this.find('.scry-rulings'), card
@@ -146,8 +126,10 @@ construct = (card) ->
     content.call scry, card
 
     switch card.layout
-        when 'flip' then scry.find('.scry-flip').show().on 'click.scry', $.proxy(flip, scry, card)
-        when 'double-faced' then scry.find('.scry-transform').show().on 'click.scry', $.proxy(transform, scry, card)
+        when 'flip' then scry.find('.scry-flip-control').show().on 'click.scry', $.proxy(flip, scry, card)
+        when 'double-faced'
+            scry.find('.scry-transform-control').show().on 'click.scry', $.proxy(transform, scry, card)
+            scry.find('.scry-back').css 'background-image', imageUrl card.other
 
     scry.find('.scry-info-toggle').on 'click.scry', -> scry.find('.scry-info').slideToggle()
     scry.find('.scry-tabs>li').on 'click.scry', ->
