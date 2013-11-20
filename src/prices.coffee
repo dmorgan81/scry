@@ -1,4 +1,4 @@
-databaseVersion = 2
+databaseVersion = 3
 partnerKey = 'TEST'
 pricesUrl = (name, set) -> "http://partner.tcgplayer.com/x/phl.asmx/p?pk=#{partnerKey}&p=#{name}&s=#{set}"
 vendorUrl = (name, set) -> "http://partner.tcgplayer.com/x/pv.asmx/p?pk=#{partnerKey}&v=8&p=#{name}&s=#{set}"
@@ -31,6 +31,7 @@ chrome.runtime.onInstalled.addListener (details) ->
             version : databaseVersion,
             schema : {
                 1 : (transaction) -> transaction.createObjectStore 'sets', { autoIncrement : false }
+                3 : (transaction) -> transaction.objectStore('sets').clear()
             },
             upgrade : (transaction) ->
                 store = transaction.objectStore 'sets'
