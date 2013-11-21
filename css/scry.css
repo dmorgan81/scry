@@ -16,17 +16,13 @@
 
 .scry-images {
     border: 5px solid;
-    box-shadow: -3px 3px 5px #888888;
+    box-shadow: -7px 7px 5px 0px rgba(0,0,0,0.5);
     border-radius: 10px;
     height: 408px;
     position: relative;
     width: 288px;
     -webkit-transform-style: preserve-3d;
     -webkit-transition: 0.8s;
-}
-
-.scry.scry-split .scry-images {
-    box-shadow: 3px 3px 5px #888888;
 }
 
 .scry.scry-alpha .scry-images {
@@ -51,15 +47,16 @@
 
 .scry.scry-transform .scry-images {
     -webkit-transform: rotateY(180deg);
-    box-shadow: 3px 3px 5px #888888;
+    box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.5);
 }
 
 .scry.scry-flip .scry-images {
     -webkit-transform: rotate(180deg);
-    box-shadow: 3px -3px 5px #888888;
+    box-shadow: 7px -7px 5px 0px rgba(0,0,0,0.5);
 }
 
 .scry.scry-split .scry-images {
+    box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.5);
     -webkit-backface-visibility: hidden;
     -webkit-transform: rotate(90deg);
     -webkit-transform-origin: 70%;
