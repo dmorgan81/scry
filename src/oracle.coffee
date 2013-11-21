@@ -1,8 +1,8 @@
 splitRegex = /(.*?)\s?\/\/?\s?(.*)/
-dbVersion = 3
+dbVersion = 4
 
 getQueryName = (s) ->
-    return s.replace(/[^\s\w]/gi, '').toUpperCase()
+    return s.replace(/Æ/gi, 'AE').replace(/[^\s\w]/gi, '').toUpperCase()
 
 notify = ->
     $.Deferred((dfd) ->
