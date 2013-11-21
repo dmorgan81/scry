@@ -80,9 +80,10 @@ onInstall = (details) ->
 
 chrome.runtime.onInstalled.addListener(onInstall)
 
-selectSet = (setcode, card) ->
-    return card.sets[0] unless setcode?
-    return set for set in card.sets when set.setcode == setcode
+selectSet = (msg, card) ->
+    if (msg.multiverseid) then return set for set in card.sets when set.multiverseid == msg.multiverseid
+    return card.sets[0] unless msg.setcode?
+    return set for set in card.sets when set.setcode == msg.setcode
 
 prune = (card) ->
     delete card.multiverseids
@@ -112,6 +113,6 @@ chrome.runtime.onMessage.addListener (msg, sender, respond) ->
     if typeof query == 'number' then store = store.index('multiverseids')
     store.get(query).done (card) ->
         return respond.apply unless card
-        $.extend true, card, selectSet(msg.setcode, card)
+        $.extend true, card, selectSet(msg, card)
         $.when(findOther(card)).done (card) -> respond.apply null, [ prune(card) ]
     return true
