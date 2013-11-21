@@ -60,6 +60,7 @@
 }
 
 .scry.scry-split .scry-images {
+    -webkit-backface-visibility: hidden;
     -webkit-transform: rotate(90deg);
     -webkit-transform-origin: 70%;
 }
@@ -99,7 +100,7 @@
 .scry-info-toggle {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    height: 10px;
+    height: 20px;
     left: 0;
     margin: auto;
     position: absolute;
