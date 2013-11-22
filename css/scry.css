@@ -85,6 +85,11 @@
     width: 25px;
 }
 
+.scry.scry-dfc-planeswalker .scry-transform-control {
+    left: 15px;
+    top: 13px;
+}
+
 .scry-flip-control:hover, .scry-transform-control:hover {
     box-shadow: 0 0 10px 5px #FFD700;
     cursor: pointer;

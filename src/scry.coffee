@@ -132,6 +132,7 @@ construct = (card) ->
         when 'double-faced'
             scry.find('.scry-transform-control').show().on 'click.scry', $.proxy(transform, scry, card)
             scry.find('.scry-back').css 'background-image', imageUrl card.other
+            scry.toggleClass 'scry-dfc-planeswalker', ('Planeswalker' in card.types)
 
     scry.find('.scry-info-toggle').on 'click.scry', -> scry.find('.scry-info').slideToggle()
     scry.find('.scry-tabs>li').on 'click.scry', ->
