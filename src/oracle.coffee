@@ -93,7 +93,7 @@ prune = (card) ->
 findOther = (card) ->
     return $.Deferred((dfd) ->
         return dfd.resolve card unless card.names
-        otherName = (name for name in card.names when name != card.name)[0].toUpperCase()
+        otherName = getQueryName (name for name in card.names when name != card.name)[0]
         $.indexedDB('oracle').objectStore('cards', false).get(otherName).done (other) ->
             $.extend true, other, selectSet(card.setcode, other)
             card.other = prune(other)
