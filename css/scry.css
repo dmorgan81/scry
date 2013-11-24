@@ -9,6 +9,29 @@
     -webkit-perspective: 1000;
 }
 
+.scry.scry-drag {
+    cursor: move;
+}
+
+.scry-hide-control {
+    background: darkgrey;
+    border-bottom-left-radius: 10px;
+    bottom: 0;
+    cursor: pointer;
+    display: none;
+    opacity: 0.8;
+    padding: 5px;
+    position: absolute;
+}
+
+.scry.scry-animating .scry-hide-control {
+    display: none !important;
+}
+
+.scry.scry-dragged .scry-hide-control {
+    display: block;
+}
+
 .scry.scry-split {
     height: 298px;
     width: 418px;
@@ -27,6 +50,10 @@
 
 .scry.scry-alpha .scry-images {
     border-radius: 15px;
+}
+
+.scry.scry-alpha .scry-hide-control {
+    border-bottom-left-radius: 15px;
 }
 
 .scry-front, .scry-back {
@@ -95,7 +122,8 @@
     cursor: pointer;
 }
 
-.scry-no-hover {
+.scry.scry-animating .scry-flip-control,
+.scry.scry-animating .scry-transform-control {
     box-shadow: none !important;
 }
 

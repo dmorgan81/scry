@@ -22,7 +22,7 @@ oracle = (query) ->
 show = (e) ->
     this.clearQueue()
     return unless this.is ':hidden'
-    $('.scry').not(this).fadeOut 300
+    $('.scry').not(this).not('.scry-dragged').fadeOut 300
     w = this.width()
     h = this.height()
     b = $(window).width()
@@ -37,20 +37,17 @@ show = (e) ->
     this.css({ left : cl, top : ct}).fadeIn 300
 
 hide = ->
-    $(this).delay(500).fadeOut(300).queue ->
+    return if $(this).hasClass 'scry-dragged'
+    $(this).off('mousemove.scry').delay(500).fadeOut(300).queue ->
         $(this).dequeue().find('.scry-info').hide()
 
 flip = (card) ->
     oracleConstruct.call this.find('.scry-oracle'), if this.hasClass('scry-flip') then card else card.other
-    this.toggleClass('scry-flip').find('.scry-flip-control').addClass('scry-no-hover').delay(800).queue(->
-        $(this).removeClass('scry-no-hover').dequeue()
-    )
+    this.toggleClass('scry-flip').addClass('scry-animating').delay(800).queue => this.removeClass('scry-animating').dequeue()
 
 transform = (card) ->
     oracleConstruct.call this.find('.scry-oracle'), if this.hasClass('scry-transform') then card else card.other
-    this.toggleClass('scry-transform').find('.scry-transform-control').addClass('scry-no-hover').delay(800).queue(->
-        $(this).removeClass('scry-no-hover').dequeue()
-    )
+    this.toggleClass('scry-transform').addClass('scry-animating').delay(800).queue => this.removeClass('scry-animating').dequeue()
 
 content = (card) ->
     this.toggleClass 'scry-alpha', card.setcode == 'LEA'
@@ -141,12 +138,37 @@ construct = (card) ->
         scry.find(".scry-panels .scry-#{type}").show().siblings().filter(":not(.scry-#{type})").hide()
     return scry.toggleClass('scry-split', card.layout == 'split').appendTo 'body'
 
+drag = (e) ->
+    zindex = 101
+    $('.scry').each ->
+        i = parseInt $(this).css('zIndex'), 10
+        zindex = Math.max(zindex, i) + 1
+    this.addClass('scry-drag').css('zIndex', zindex).on 'mousemove.scry', {
+        pos : this.position()
+        spot : { pageX : e.pageX, pageY : e.pageY }
+    }, move
+
+move = (e) ->
+    pos = e.data.pos
+    spot = e.data.spot
+    $(this).addClass('scry-dragged').css {
+        left : pos.left + e.pageX - spot.pageX
+        top : pos.top + e.pageY - spot.pageY
+    }
+
+drop = (e) ->
+    this.removeClass('scry-drag').off 'mousemove.scry'
+
 attach = (scry) ->
     $(this).data('scry', true)
            .on('mouseenter.scry', $.proxy(show, scry))
            .on('mouseleave.scry', $.proxy(hide, scry))
     scry.on('mouseenter.scry', -> $(this).clearQueue())
         .on('mouseleave.scry', hide)
+        .on('mousedown.scry', $.proxy(drag, scry))
+        .on('mouseup.scry', $.proxy(drop, scry))
+    scry.find('.scry-hide-control').on 'click.scry', ->
+        hide.call scry.fadeOut(300).queue -> scry.removeClass 'scry-dragged'
     return scry
 
 init = (e) ->
@@ -175,7 +197,8 @@ $.fn.scry = (options) ->
 
     chrome.runtime.sendMessage { type : 'init' }
     chrome.runtime.onMessage.addListener receive
-    $('body').on 'mouseup.scry', (e) -> $(this).data('scry', e)
+    $('body').on 'mouseup.scry', (e) ->
+        $(this).data('scry', e).find('.scry').removeClass('scry-drag').off 'mousemove.scry'
     return this.each ->
         $(this).on 'mouseover.scry', settings.selector, settings, (e) ->
             return if $(this).data('scry')
