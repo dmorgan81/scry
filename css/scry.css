@@ -28,8 +28,12 @@
     display: none !important;
 }
 
-.scry.scry-dragged .scry-hide-control {
+.scry.scry-dragged:hover .scry-hide-control {
     display: block;
+}
+
+.scry.scry-alpha .scry-hide-control {
+    border-bottom-left-radius: 15px;
 }
 
 .scry.scry-split {
@@ -50,10 +54,6 @@
 
 .scry.scry-alpha .scry-images {
     border-radius: 15px;
-}
-
-.scry.scry-alpha .scry-hide-control {
-    border-bottom-left-radius: 15px;
 }
 
 .scry-front, .scry-back {
@@ -127,24 +127,28 @@
     box-shadow: none !important;
 }
 
-.scry-info-toggle {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    height: 20px;
-    left: 0;
-    margin: auto;
-    position: absolute;
-    top: 0;
-    width: 298px;
-}
-
-.scry-info-toggle:hover {
-    box-shadow: 0 -3px 5px 2px #FFD700;
+.scry-info-control {
+    background: darkgrey;
+    border-bottom-right-radius: 10px;
+    bottom: 0;
     cursor: pointer;
+    display: none;
+    opacity: 0.8;
+    padding: 5px;
+    position: absolute;
+    right: 0;
 }
 
-.scry.scry-split .scry-info-toggle {
-    width: 418px;
+.scry:hover .scry-info-control {
+    display: block;
+}
+
+.scry.scry-animating .scry-info-control {
+    display: none !important;
+}
+
+.scry.scry-alpha .scry-info-control {
+    border-bottom-right-radius: 15px;
 }
 
 .scry-info {
