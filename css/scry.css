@@ -86,9 +86,10 @@
 
 .scry.scry-split .scry-images {
     box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.5);
+    left: 60px;
+    top: -60px;
     -webkit-backface-visibility: hidden;
     -webkit-transform: rotate(90deg);
-    -webkit-transform-origin: 70%;
 }
 
 .scry-flip-control {
