@@ -1,4 +1,6 @@
 .scry {
+    background: black;
+    border-radius: 10px;
     color: black;
     display: none;
     height: 418px;
@@ -7,6 +9,15 @@
     width: 298px;
     z-index: 100;
     -webkit-perspective: 1000;
+}
+
+.scry.scry-animating,
+.scry.scry-drag {
+    background: transparent;
+}
+
+.scry.scry-alpha {
+    border-radius: 15px;
 }
 
 .scry.scry-drag {
