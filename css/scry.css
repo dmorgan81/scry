@@ -14,14 +14,16 @@
 }
 
 .scry-hide-control {
-    background: darkgrey;
+    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/close.png') center no-repeat;
     border-bottom-left-radius: 10px;
     bottom: 0;
     cursor: pointer;
     display: none;
+    height: 22px;
     opacity: 0.8;
     padding: 5px;
     position: absolute;
+    width: 22px;
 }
 
 .scry.scry-animating .scry-hide-control {
@@ -128,15 +130,17 @@
 }
 
 .scry-info-control {
-    background: darkgrey;
+    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/info.png') center no-repeat;
     border-bottom-right-radius: 10px;
     bottom: 0;
     cursor: pointer;
     display: none;
+    height: 22px;
     opacity: 0.8;
     padding: 5px;
     position: absolute;
     right: 0;
+    width: 22px;
 }
 
 .scry:hover .scry-info-control {

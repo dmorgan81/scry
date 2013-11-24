@@ -137,6 +137,8 @@
         }
     ],
     "web_accessible_resources" : [
+        "img/close.png",
+        "img/info.png",
         "template.html"
     ]
 }
