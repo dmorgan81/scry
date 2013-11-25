@@ -139,6 +139,7 @@ construct = (card) ->
     return scry.toggleClass('scry-split', card.layout == 'split').appendTo 'body'
 
 drag = (e) ->
+    return unless e.button == 0
     zindex = 101
     $('.scry').each ->
         i = parseInt $(this).css('zIndex'), 10
