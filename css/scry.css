@@ -26,8 +26,8 @@
 
 .scry-hide-control {
     background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/close.png') center no-repeat;
-    border-bottom-left-radius: 10px;
-    bottom: 0;
+    border-top-right-radius: 10px;
+    bottom: 32px;
     cursor: pointer;
     display: none;
     height: 22px;
@@ -43,10 +43,6 @@
 
 .scry.scry-dragged:hover .scry-hide-control {
     display: block;
-}
-
-.scry.scry-alpha .scry-hide-control {
-    border-bottom-left-radius: 15px;
 }
 
 .scry.scry-split {
@@ -143,15 +139,16 @@
 
 .scry-info-control {
     background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/info.png') center no-repeat;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
     bottom: 0;
     cursor: pointer;
     display: none;
     height: 22px;
+    left: 0;
     opacity: 0.8;
     padding: 5px;
     position: absolute;
-    right: 0;
     width: 22px;
 }
 
@@ -164,16 +161,20 @@
 }
 
 .scry.scry-alpha .scry-info-control {
-    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.scry.scry-dragged .scry-info-control {
+    border-top-right-radius: 0;
 }
 
 .scry-info {
+    bottom: 10px;
     height: 398px;
     display: none;
     left: 10px;
     margin: auto;
     position: absolute;
-    top: 10px;
     width: 278px;
 }
 
@@ -287,10 +288,6 @@
     content: ' @';
 }
 
-.scry-panels .scry-printings {
-    opacity: 0.8;
-}
-
 .scry-rulings {
     overflow: auto;
 }
@@ -304,6 +301,7 @@
 }
 
 .scry-printings {
+    opacity: 0.8;
     overflow: auto;
 }
 

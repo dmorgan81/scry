@@ -131,7 +131,7 @@ construct = (card) ->
             scry.find('.scry-back').css 'background-image', imageUrl card.other
             scry.toggleClass 'scry-dfc-planeswalker', ('Planeswalker' in card.types)
 
-    scry.find('.scry-info-control').on 'click.scry', -> scry.find('.scry-info').slideToggle()
+    scry.find('.scry-info-control').on 'click.scry', -> scry.find('.scry-info').animate { height : 'toggle', opacity : 'toggle' }
     scry.find('.scry-tabs>li').on 'click.scry', ->
         type = $(this).text().toLowerCase()
         $(this).addClass('scry-active').siblings().removeClass('scry-active')
