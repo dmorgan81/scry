@@ -24,25 +24,84 @@
     cursor: move;
 }
 
-.scry-hide-control {
-    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/close.png') center no-repeat;
-    border-top-right-radius: 10px;
-    bottom: 32px;
-    cursor: pointer;
+.scry-controls {
+    bottom: 0;
     display: none;
-    height: 22px;
     opacity: 0.8;
+    position: absolute;
+    width: 22px;
+}
+
+.scry-info-controls {
+    bottom: 32px;
+    display:none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+}
+
+.scry:hover .scry-controls {
+    display: block;
+}
+
+.scry.scry-animating .scry-controls {
+    display: none !important;
+}
+
+.scry-menu-control {
+    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/menu.png') center no-repeat;
+    border-bottom-left-radius: 10px;
+    bottom: 0;
+    cursor: pointer;
+    height: 22px;
     padding: 5px;
     position: absolute;
     width: 22px;
 }
 
-.scry.scry-animating .scry-hide-control {
-    display: none !important;
+.scry-menu-control:hover {
+    background-color: lightgrey;
 }
 
-.scry.scry-dragged:hover .scry-hide-control {
-    display: block;
+.scry.scry-alpha .scry-menu-control {
+    border-bottom-left-radius: 15px;
+}
+
+.scry-info-controls>li {
+    cursor: pointer;
+    height: 22px;
+    padding: 5px;
+    width: 22px;
+}
+
+.scry-info-controls>li:hover {
+    background-color: lightgrey;
+}
+
+.scry-info-controls>.scry-active {
+    background-color: lightgrey;
+}
+
+.scry-oracle-control {
+    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/oracle.png') center no-repeat;
+    border-top-right-radius: 10px;
+}
+
+.scry-rulings-control {
+    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/rulings.png') center no-repeat;
+}
+
+.scry-printings-control {
+    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/printings.png') center no-repeat;
+}
+
+.scry-prices-control {
+    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/prices.png') center no-repeat;
+}
+
+.scry-hide-control {
+    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/close.png') center no-repeat;
 }
 
 .scry.scry-split {
@@ -137,84 +196,31 @@
     box-shadow: none !important;
 }
 
-.scry-info-control {
-    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/info.png') center no-repeat;
-    border-bottom-left-radius: 10px;
-    border-top-right-radius: 10px;
-    bottom: 0;
-    cursor: pointer;
-    display: none;
-    height: 22px;
-    left: 0;
-    opacity: 0.8;
-    padding: 5px;
-    position: absolute;
-    width: 22px;
-}
-
-.scry:hover .scry-info-control {
-    display: block;
-}
-
-.scry.scry-animating .scry-info-control {
-    display: none !important;
-}
-
-.scry.scry-alpha .scry-info-control {
-    border-bottom-left-radius: 15px;
-}
-
-.scry.scry-dragged .scry-info-control {
-    border-top-right-radius: 0;
-}
-
-.scry-info {
+.scry-panels {
     bottom: 10px;
     height: 398px;
-    display: none;
     left: 10px;
     margin: auto;
     position: absolute;
     width: 278px;
 }
 
-.scry.scry-split .scry-info {
+.scry.scry-split .scry-panels {
     height: 278px;
     width: 398px;
 }
 
-.scry-info * {
+.scry-panels * {
     font-family: sans-serif;
     font-size: 12px;
-}
-
-.scry-tabs {
-    height: 25px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-.scry-tabs>li {
-    background: darkgrey;
-    cursor: pointer;
-    display: inline-block;
-    height: 15px;
-    margin: 0;
-    padding: 5px 0px;
-    width: 25%;
-}
-
-.scry-tabs .scry-active {
-    background: lightgrey;
 }
 
 .scry-panels>div {
     background: lightgrey;
     display: none;
-    height: 363px;
+    height: 388px;
     padding: 5px;
+    position: absolute;
     width: 268px;
 }
 
@@ -338,7 +344,6 @@
 }
 
 .scry-panels .scry-oracle {
-    display: block;
     overflow: auto;
 }
 

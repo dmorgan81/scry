@@ -131,11 +131,13 @@ construct = (card) ->
             scry.find('.scry-back').css 'background-image', imageUrl card.other
             scry.toggleClass 'scry-dfc-planeswalker', ('Planeswalker' in card.types)
 
-    scry.find('.scry-info-control').on 'click.scry', -> scry.find('.scry-info').animate { height : 'toggle', opacity : 'toggle' }
-    scry.find('.scry-tabs>li').on 'click.scry', ->
-        type = $(this).text().toLowerCase()
-        $(this).addClass('scry-active').siblings().removeClass('scry-active')
-        scry.find(".scry-panels .scry-#{type}").show().siblings().filter(":not(.scry-#{type})").hide()
+    scry.find('.scry-menu-control').on 'click.scry', -> scry.find('.scry-info-controls').slideToggle()
+    scry.find('.scry-info-controls>li').on 'click.scry', ->
+        type = $(this).attr 'panel'
+        return unless type
+        $(this).toggleClass('scry-active').siblings().removeClass('scry-active')
+        scry.find(".scry-panels .scry-#{type}").fadeToggle().queue ->
+            $(this).dequeue().siblings().filter(":not(.scry-#{type})").hide()
     return scry.toggleClass('scry-split', card.layout == 'split').appendTo 'body'
 
 drag = (e) ->
