@@ -25,38 +25,37 @@
 }
 
 .scry-controls {
-    bottom: 0;
     display: none;
     opacity: 0.8;
     position: absolute;
+    top: 0;
     width: 22px;
 }
 
 .scry-info-controls {
-    bottom: 32px;
     display:none;
     list-style: none;
     margin: 0;
     padding: 0;
     position: absolute;
+    top: 32px;
 }
 
 .scry:hover .scry-controls {
     display: block;
 }
 
-.scry.scry-animating .scry-controls {
+.scry.scry-animating .scry-controls,
+.scry.scry-animating .scry-panels {
     display: none !important;
 }
 
 .scry-menu-control {
     background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/menu.png') center no-repeat;
-    border-bottom-left-radius: 10px;
-    bottom: 0;
+    border-top-left-radius: 10px;
     cursor: pointer;
     height: 22px;
     padding: 5px;
-    position: absolute;
     width: 22px;
 }
 
@@ -65,7 +64,7 @@
 }
 
 .scry.scry-alpha .scry-menu-control {
-    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
 }
 
 .scry-info-controls>li {
@@ -85,7 +84,6 @@
 
 .scry-oracle-control {
     background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/oracle.png') center no-repeat;
-    border-top-right-radius: 10px;
 }
 
 .scry-rulings-control {
@@ -98,10 +96,21 @@
 
 .scry-prices-control {
     background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/prices.png') center no-repeat;
+    border-bottom-right-radius: 10px;
 }
 
 .scry-hide-control {
     background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/close.png') center no-repeat;
+}
+
+.scry-flip-control {
+    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/flip.png') center no-repeat;
+    display: none;
+}
+
+.scry-transform-control {
+    background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/transform.png') center no-repeat;
+    display: none;
 }
 
 .scry.scry-split {
@@ -158,44 +167,6 @@
     -webkit-transform: rotate(90deg);
 }
 
-.scry-flip-control {
-    display: none;
-    left: 21px;
-    height: 148px;
-    position: absolute;
-    top: 128px;
-    width: 254px;
-}
-
-.scry.scry-flip .scry-flip-control {
-    top: 142px;
-}
-
-.scry-transform-control {
-    border-radius: 30px;
-    display: none;
-    height: 25px;
-    left: 16px;
-    position: absolute;
-    top: 19px;
-    width: 25px;
-}
-
-.scry.scry-dfc-planeswalker .scry-transform-control {
-    left: 15px;
-    top: 13px;
-}
-
-.scry-flip-control:hover, .scry-transform-control:hover {
-    box-shadow: 0 0 10px 5px #FFD700;
-    cursor: pointer;
-}
-
-.scry.scry-animating .scry-flip-control,
-.scry.scry-animating .scry-transform-control {
-    box-shadow: none !important;
-}
-
 .scry-panels {
     bottom: 10px;
     height: 398px;
@@ -231,7 +202,7 @@
 }
 
 .scry-split .scry-panels>div {
-    height: 243px;
+    height: 268px;
     width: 388px;
 }
 
@@ -383,6 +354,7 @@
 
 .scry-split .scry-oracle.scry-left,
 .scry-split .scry-oracle.scry-right {
+    position: relative;
     width: 188px;
 }
 

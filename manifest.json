@@ -138,6 +138,7 @@
     ],
     "web_accessible_resources" : [
         "img/close.png",
+        "img/flip.png",
         "img/menu.png",
         "img/oracle.png",
         "img/prices.png",

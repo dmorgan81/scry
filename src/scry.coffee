@@ -136,8 +136,8 @@ construct = (card) ->
         type = $(this).attr 'panel'
         return unless type
         $(this).toggleClass('scry-active').siblings().removeClass('scry-active')
-        scry.find(".scry-panels .scry-#{type}").fadeToggle().queue ->
-            $(this).dequeue().siblings().filter(":not(.scry-#{type})").hide()
+        scry.find('.scry-panels>div').fadeOut 200
+        scry.find(".scry-panels .scry-#{type}").filter(':not(:visible)').fadeIn 200
     return scry.toggleClass('scry-split', card.layout == 'split').appendTo 'body'
 
 drag = (e) ->
