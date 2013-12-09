@@ -129,10 +129,8 @@ construct = (card) ->
         when 'double-faced'
             scry.find('.scry-transform-control').show().on 'click.scry', $.proxy(transform, scry, card)
             scry.find('.scry-back').css 'background-image', imageUrl card.other
-            scry.toggleClass 'scry-dfc-planeswalker', ('Planeswalker' in card.types)
 
-    scry.find('.scry-menu-control').on 'click.scry', -> scry.find('.scry-info-controls').slideToggle()
-    scry.find('.scry-info-controls>li').on 'click.scry', ->
+    scry.find('.scry-controls>li').on 'click.scry', ->
         type = $(this).attr 'panel'
         return unless type
         $(this).toggleClass('scry-active').siblings().removeClass('scry-active')
@@ -171,7 +169,7 @@ attach = (scry) ->
         .on('mousedown.scry', $.proxy(drag, scry))
         .on('mouseup.scry', $.proxy(drop, scry))
     scry.find('.scry-hide-control').on 'click.scry', ->
-        hide.call scry.fadeOut(300).queue -> scry.removeClass 'scry-dragged'
+        scry.fadeOut(300).queue -> hide.call scry.removeClass 'scry-dragged'
     return scry
 
 init = (e) ->
