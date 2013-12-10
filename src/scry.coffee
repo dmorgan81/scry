@@ -1,5 +1,5 @@
 templates = $('<div/>').load(chrome.extension.getURL('template.html'))
-imageUrl = (card) -> "url(\"http://mtgimage.com/set/#{card.setcode}/#{card.image}.jpg\")"
+imageUrl = (card) -> "url(\"http://mtgimage.com/multiverseid/#{card.multiverseid}.jpg\")"
 
 prices = (card) ->
     $.Deferred((dfd) ->
