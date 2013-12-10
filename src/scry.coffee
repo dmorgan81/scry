@@ -63,14 +63,15 @@ content = (card) ->
     this.find('.scry-oracle').addClass('scry-left').after(other)
 
 oracleConstruct = (card) ->
+    if !card then card = { power : 2, toughness : 2, type : 'Creature' }
     this.find('div').empty()
     for prop, value of card
         do (prop, value) =>
             s = this.find ".scry-oracle-#{prop}"
             if (prop == 'text') then value = value.replace(/\n/g, '<BR/>').replace /(\(.*\))/g, (m) -> return "<i>#{m}</i>"
             s.html value
-    for prop in [ 'power', 'toughness', 'loyalty' ]
-        do (prop) => if !card[prop] then this.find(".scry-oracle-#{prop}").remove()
+    for prop in [ 'power', 'toughness', 'loyalty', 'artist' ]
+        do (prop) => this.find(".scry-oracle-#{prop}").toggle card[prop] != undefined
 
 pricesConstruct = (prices) ->
     template = templates.find '.scry-vendor'
@@ -126,10 +127,9 @@ construct = (card) ->
 
     switch card.layout
         when 'flip' then scry.find('.scry-flip-control').show().on 'click.scry', $.proxy(flip, scry, card)
-        when 'double-faced'
-            scry.find('.scry-transform-control').show().on 'click.scry', $.proxy(transform, scry, card)
-            scry.find('.scry-back').css 'background-image', imageUrl card.other
+        when 'double-faced' then scry.find('.scry-back').css 'background-image', imageUrl card.other
 
+    scry.find('.scry-transform-control').on 'click.scry', $.proxy(transform, scry, card)
     scry.find('.scry-controls>li').on 'click.scry', ->
         type = $(this).attr 'panel'
         return unless type

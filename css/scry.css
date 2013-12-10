@@ -65,11 +65,11 @@
 }
 
 .scry-controls li:first-child {
-    border-top-left-radius: 15px;
+    border-top-left-radius: 10px;
 }
 
 .scry-controls li:last-child {
-    border-bottom-left-radius: 15px;
+    border-bottom-left-radius: 10px;
 }
 
 .scry-oracle-control {
@@ -99,7 +99,6 @@
 
 .scry-transform-control {
     background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/transform.png') center no-repeat;
-    display: none;
 }
 
 .scry.scry-split {
@@ -135,25 +134,36 @@
 }
 
 .scry-back {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/cardback.png');
     -webkit-transform: rotateY(180deg);
 }
 
 .scry.scry-transform .scry-images {
-    -webkit-transform: rotateY(180deg);
+    border-color: black !important;
     box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.5);
+    -webkit-transform: rotateY(180deg);
 }
 
 .scry.scry-flip .scry-images {
-    -webkit-transform: rotate(180deg);
     box-shadow: 7px -7px 5px 0px rgba(0,0,0,0.5);
+    -webkit-transform: rotate(180deg);
+}
+
+.scry.scry-flip.scry-transform .scry-images {
+    box-shadow: -7px -7px 5px 0px rgba(0,0,0,0.5);
+    -webkit-transform: rotate(-180deg) rotateY(-180deg);
 }
 
 .scry.scry-split .scry-images {
     box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.5);
     left: 60px;
     top: -60px;
-    -webkit-backface-visibility: hidden;
     -webkit-transform: rotate(90deg);
+}
+
+.scry.scry-split.scry-transform .scry-images {
+    -webkit-transform: rotate(90deg) rotateX(180deg);
+    box-shadow: 7px -7px 5px 0px rgba(0,0,0,0.5);
 }
 
 .scry-panels {
