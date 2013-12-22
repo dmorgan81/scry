@@ -124,7 +124,7 @@
 .scry-front, .scry-back {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 288px 408px;
     height: 408px;
     left: 0;
     position: absolute;
@@ -138,18 +138,18 @@
     -webkit-transform: rotateY(180deg);
 }
 
-.scry.scry-transform .scry-images {
+.scry.scry-transformed .scry-images {
     border-color: black !important;
     box-shadow: 7px 7px 5px 0px rgba(0,0,0,0.5);
     -webkit-transform: rotateY(180deg);
 }
 
-.scry.scry-flip .scry-images {
+.scry.scry-flipped .scry-images {
     box-shadow: 7px -7px 5px 0px rgba(0,0,0,0.5);
     -webkit-transform: rotate(180deg);
 }
 
-.scry.scry-flip.scry-transform .scry-images {
+.scry.scry-flipped.scry-transformed .scry-images {
     box-shadow: -7px -7px 5px 0px rgba(0,0,0,0.5);
     -webkit-transform: rotate(-180deg) rotateY(-180deg);
 }
@@ -161,7 +161,7 @@
     -webkit-transform: rotate(90deg);
 }
 
-.scry.scry-split.scry-transform .scry-images {
+.scry.scry-split.scry-transformed .scry-images {
     -webkit-transform: rotate(90deg) rotateX(180deg);
     box-shadow: 7px -7px 5px 0px rgba(0,0,0,0.5);
 }
@@ -365,4 +365,73 @@
 .scry-split .scry-right {
     border-left: 1px solid darkgrey;
     float: right;
+}
+
+.scry.scry-phenomenon,
+.scry.scry-plane {
+    height: 447px;
+    width: 619px;
+}
+
+.scry.scry-phenomenon .scry-transform-control,
+.scry.scry-plane .scry-transform-control {
+    display: none;
+}
+
+.scry.scry-phenomenon .scry-images,
+.scry.scry-plane .scry-images {
+    height: 437px;
+    width: 609px;
+}
+
+.scry.scry-phenomenon .scry-front,
+.scry.scry-phenomenon .scry-back,
+.scry.scry-plane .scry-front,
+.scry.scry-plane .scry-back {
+    background-size: 639px 447px;
+    height: 437px;
+    width: 609px;
+}
+
+.scry.scry-phenomenon .scry-panels,
+.scry.scry-plane .scry-panels {
+    height: 427px;
+    width: 609px;
+}
+
+.scry.scry-phenomenon .scry-panels>div,
+.scry.scry-plane .scry-panels>div {
+    height: 417px;
+    width: 589px;
+}
+
+.scry.scry-scheme {
+    height: 619px;
+    width: 437px;
+}
+
+.scry.scry-scheme .scry-transform-control {
+    display: none;
+}
+
+.scry-scheme .scry-images {
+    height: 609px;
+    width: 427px;
+}
+
+.scry-scheme .scry-front,
+.scry-scheme .scry-back {
+    background-size: 427px 609px;
+    height: 609px;
+    width: 427px;
+}
+
+.scry-scheme .scry-panels {
+    height: 599px;
+    width: 407px;
+}
+
+.scry-scheme .scry-panels>div {
+    height: 589px;
+    width: 407px;
 }

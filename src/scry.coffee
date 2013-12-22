@@ -42,12 +42,12 @@ hide = ->
         $(this).dequeue().find('.scry-info').hide()
 
 flip = (card) ->
-    oracleConstruct.call this.find('.scry-oracle'), if this.hasClass('scry-flip') then card else card.other
-    this.toggleClass('scry-flip').addClass('scry-animating').delay(800).queue => this.removeClass('scry-animating').dequeue()
+    oracleConstruct.call this.find('.scry-oracle'), if this.hasClass('scry-flipped') then card else card.other
+    this.toggleClass('scry-flipped').addClass('scry-animating').delay(800).queue => this.removeClass('scry-animating').dequeue()
 
 transform = (card) ->
-    oracleConstruct.call this.find('.scry-oracle'), if this.hasClass('scry-transform') then card else card.other
-    this.toggleClass('scry-transform').addClass('scry-animating').delay(800).queue => this.removeClass('scry-animating').dequeue()
+    oracleConstruct.call this.find('.scry-oracle'), if this.hasClass('scry-transformed') then card else card.other
+    this.toggleClass('scry-transformed').addClass('scry-animating').delay(800).queue => this.removeClass('scry-animating').dequeue()
 
 content = (card) ->
     this.toggleClass 'scry-alpha', card.setcode == 'LEA'
@@ -136,7 +136,7 @@ construct = (card) ->
         $(this).toggleClass('scry-active').siblings().removeClass('scry-active')
         scry.find('.scry-panels>div').fadeOut 200
         scry.find(".scry-panels .scry-#{type}").filter(':not(:visible)').fadeIn 200
-    return scry.toggleClass('scry-split', card.layout == 'split').appendTo 'body'
+    return scry.addClass("scry-#{card.layout}").appendTo 'body'
 
 drag = (e) ->
     return unless e.button == 0
