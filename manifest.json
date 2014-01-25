@@ -58,7 +58,7 @@
             "js" : [
                 "lib/jquery-2.0.3.min.js",
                 "js/scry.js",
-                "js/site/mtgsalvation.js"
+                "js/site/mtgsalvationforum.js"
             ],
             "run_at" : "document_end"
         },
