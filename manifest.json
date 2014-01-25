@@ -50,7 +50,6 @@
         },
         {
             "matches" : [
-                "*://www.mtgsalvation.com/*",
                 "*://forums.mtgsalvation.com/*"
             ],
             "css" : [
@@ -65,7 +64,8 @@
         },
         {
             "matches" : [
-                "*://wiki.mtgsalvation.com/*"
+                "*://wiki.mtgsalvation.com/*",             
+                "*://www.mtgsalvation.com/*"
             ],
             "css" : [
                 "css/scry.css"
