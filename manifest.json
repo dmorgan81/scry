@@ -50,7 +50,7 @@
         },
         {
             "matches" : [
-                "http://*.mtgsalvation.com/*"
+                "*://forums.mtgsalvation.com/*"
             ],
             "css" : [
                 "css/scry.css"
@@ -58,7 +58,22 @@
             "js" : [
                 "lib/jquery-2.0.3.min.js",
                 "js/scry.js",
-                "js/site/mtgsalvation.js"
+                "js/site/mtgsalvationforum.js"
+            ],
+            "run_at" : "document_end"
+        },
+        {
+            "matches" : [
+                "*://wiki.mtgsalvation.com/*",             
+                "*://www.mtgsalvation.com/*"
+            ],
+            "css" : [
+                "css/scry.css"
+            ],
+            "js" : [
+                "lib/jquery-2.0.3.min.js",
+                "js/scry.js",
+                "js/site/mtgsalvationwiki.js"
             ],
             "run_at" : "document_end"
         },
