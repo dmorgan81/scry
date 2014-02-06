@@ -1,8 +1,7 @@
-autoCardRegex = /AutoCard(?:Gatherer)?\('(.*?)'(?:,\s?'.*')?\)/
+###
+TODO: pull cardname from link instead of text
+###
 
-$('#posts').scry {
-    query : ->
-        match = autoCardRegex.exec $(this).attr('onclick')
-        return unescape match[1]
-    selector : 'a.autocardhref'
+$('.forum-posts,.post').scry {
+    selector : 'a.card-link'
 }

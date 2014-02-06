@@ -11,6 +11,10 @@
     -webkit-perspective: 1000;
 }
 
+.scry * {
+    box-sizing: content-box;
+}
+
 .scry.scry-animating,
 .scry.scry-drag {
     background: transparent;
