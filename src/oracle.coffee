@@ -1,5 +1,5 @@
 splitRegex = /(.*?)\s?\/\/?\s?(.*)/
-dbVersion = 6
+dbVersion = 7
 
 getQueryName = (s) ->
     return s.replace(/Æ/gi, 'AE').replace(/[^\s\w]/gi, '').toUpperCase()
@@ -43,6 +43,8 @@ processCard = (set, card) ->
     delete card.imageName
     delete card.multiverseid
     delete card.number
+    delete card.originalText
+    delete card.originalType
     delete card.printings
     delete card.rarity
     delete card.variations
