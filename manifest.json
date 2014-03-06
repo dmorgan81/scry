@@ -155,14 +155,7 @@
         }
     ],
     "web_accessible_resources" : [
-        "img/cardback.png",
-        "img/close.png",
-        "img/flip.png",
-        "img/oracle.png",
-        "img/prices.png",
-        "img/printings.png",
-        "img/rulings.png",
-        "img/transform.png",
+        "img/*.png",
         "template.html"
     ]
 }

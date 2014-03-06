@@ -16,7 +16,7 @@ task 'build', 'Build js/ from src/', ->
     build()
 
 task 'watch', 'Watch src/ for changes', ->
-    coffee = spawn 'coffee', [ '-w', '-m', '-c', '-o', 'js', 'src' ]
+    coffee = spawn 'coffee', [ '-w', '-c', '-o', 'js', 'src' ]
     coffee.stderr.on 'data', (data) ->
         process.stderr.write data.toString()
     coffee.stdout.on 'data', (data) ->
