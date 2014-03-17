@@ -130,26 +130,13 @@
                 "http://*.channelfireball.com/articles/*"
             ],
             "css" : [
-                "css/scry.css"
+                "css/scry.css",
+                "css/channelfireball.css"
             ],
             "js" : [
                 "lib/jquery-2.0.3.min.js",
                 "js/scry.js",
                 "js/site/channelfireball.js"
-            ],
-            "run_at" : "document_end"
-        },
-        {
-            "matches" : [
-                "http://*.gatheringmagic.com/*"
-            ],
-            "css" : [
-                "css/scry.css"
-            ],
-            "js" : [
-                "lib/jquery-2.0.3.min.js",
-                "js/scry.js",
-                "js/site/gatheringmagic.js"
             ],
             "run_at" : "document_end"
         }
