@@ -1,4 +1,4 @@
-databaseVersion = 4
+databaseVersion = 5
 partnerKey = 'TEST'
 pricesUrl = (name, set) -> "http://partner.tcgplayer.com/x/phl.asmx/p?pk=#{partnerKey}&p=#{name}&s=#{set}"
 vendorUrl = (name, set) -> "http://partner.tcgplayer.com/x/pv.asmx/p?pk=#{partnerKey}&v=8&p=#{name}&s=#{set}"
