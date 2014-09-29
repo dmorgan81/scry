@@ -324,16 +324,32 @@
 
 .scry-oracle-name {
     float: left;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
 }
 
 .scry-oracle-manaCost {
     float: right;
 }
+.scry-oracle-manaCost img {
+    border-radius: 200px;
+    box-shadow: -1px 1px 0px 0px;
+    margin-left: 1px;
+    vertical-align: text-top;
+}
 
 .scry-oracle-type {
     clear: both;
+}
+
+.scry-oracle-text {
+    line-height: 125%
+}
+
+.scry-oracle-text img {
+    height: 12px;
+    width: 12px;
+    vertical-align: text-top;
 }
 
 .scry-oracle-flavor {
@@ -346,6 +362,7 @@
 .scry-oracle-loyalty {
     display: inline-block;
     float: right;
+    font-size: 14px;
 }
 
 .scry-oracle-power:after {

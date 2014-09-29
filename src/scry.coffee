@@ -51,7 +51,8 @@ transform = (card) ->
 
 content = (card) ->
     this.toggleClass 'scry-alpha', card.setcode == 'LEA'
-    this.find('.scry-images').css('border-color', card.border).find('.scry-front').css 'background-image', imageUrl card
+    border = if card.border == 'silver' then 'rgb(130, 130, 133)' else card.border
+    this.find('.scry-images').css('border-color', border).find('.scry-front').css 'background-image', imageUrl card
     $.when(prices(card)).done $.proxy pricesConstruct, this.find('.scry-prices')
     this.find('.scry-oracle.scry-right').remove()
     oracleConstruct.call this.find('.scry-oracle').removeClass('scry-left'), card
@@ -62,13 +63,27 @@ content = (card) ->
     oracleConstruct.call other, card.other
     this.find('.scry-oracle').addClass('scry-left').after(other)
 
+replaceSymbols = (mc) ->
+    size = if mc == '{1000000}' then 64 else 16
+    mc = mc.replace /{([0-9wubrghpsxyz\u221E]+)}/ig, "<img src=\"http://mtgimage.com/symbol/mana/$1/#{size}.png\"></img>"
+    mc = mc.replace /{([0-9wubrg])\/([wubrgp])}/ig, '<img src="http://mtgimage.com/symbol/mana/$1$2/16.png"></img>'
+    mc = mc.replace /{([qt])}/ig, '<img src="http://mtgimage.com/symbol/other/$1/16.png"></img>'
+    return mc
+
+replaceText = (text) ->
+    text = text.replace /^(.+?)\s\u2014\s/gm, '<i>$1</i> \u2014 '
+    text = text.replace /\n/g, '<BR/>'
+    text = text.replace /(\(.*\))/g, '<i>$1</i>'
+    return replaceSymbols text
+
 oracleConstruct = (card) ->
     if !card then card = { power : 2, toughness : 2, type : 'Creature' }
     this.find('div').empty()
     for prop, value of card
         do (prop, value) =>
             s = this.find ".scry-oracle-#{prop}"
-            if (prop == 'text') then value = value.replace(/\n/g, '<BR/>').replace /(\(.*\))/g, (m) -> return "<i>#{m}</i>"
+            if (prop == 'text') then value = replaceText value
+            if (prop == 'manaCost') then value = replaceSymbols value
             s.html value
     for prop in [ 'power', 'toughness', 'loyalty', 'artist' ]
         do (prop) => this.find(".scry-oracle-#{prop}").toggle card[prop] != undefined
