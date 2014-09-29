@@ -104,6 +104,7 @@
 
 .scry-transform-control {
     background: darkgrey url('chrome-extension://__MSG_@@extension_id__/img/transform.png') center no-repeat;
+    display: none;
 }
 
 .scry.scry-split {

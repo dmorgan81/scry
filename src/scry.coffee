@@ -144,7 +144,9 @@ construct = (card) ->
         when 'flip' then scry.find('.scry-flip-control').show().on 'click.scry', $.proxy(flip, scry, card)
         when 'double-faced' then scry.find('.scry-back').css 'background-image', imageUrl card.other
 
-    scry.find('.scry-transform-control').on 'click.scry', $.proxy(transform, scry, card)
+    if (card.layout == 'double-faced' or /Morph\s/.test card.text)
+        scry.find('.scry-transform-control').show().on 'click.scry', $.proxy(transform, scry, card)
+
     scry.find('.scry-controls>li').on 'click.scry', ->
         type = $(this).attr 'panel'
         return unless type
