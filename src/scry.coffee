@@ -71,7 +71,7 @@ replaceSymbols = (mc) ->
     return mc
 
 replaceText = (text) ->
-    text = text.replace /^(.+?)\s\u2014\s/gm, '<i>$1</i> \u2014 '
+    text = text.replace /^((?!Choose).+?)\s\u2014\s/gm, '<i>$1</i> \u2014 '
     text = text.replace /\n/g, '<BR/>'
     text = text.replace /(\(.*\))/g, '<i>$1</i>'
     return replaceSymbols text
