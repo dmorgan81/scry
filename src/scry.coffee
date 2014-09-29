@@ -16,7 +16,7 @@ oracle = (query) ->
         query.type = 'oracle'
         chrome.runtime.sendMessage query, (card) ->
             if (card) then dfd.resolve card
-            else dfd reject
+            else dfd.reject
     ).promise()
 
 show = (e) ->

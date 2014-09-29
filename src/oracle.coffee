@@ -1,5 +1,5 @@
 splitRegex = /(.*?)\s?\/\/?\s?(.*)/
-dbVersion = 10
+dbVersion = 12
 
 getQueryName = (s) ->
     return s.replace(/Æ/gi, 'AE').replace(/[^\s\w]/gi, '').toUpperCase()
