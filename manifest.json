@@ -3,7 +3,7 @@
     "name" : "Scry",
     "description" : "Rollover popups for Magic: the Gathering sites",
     "homepage_url" : "http://spitemare.github.io/scry/",
-    "version" : "3.7.0",
+    "version" : "3.6.7",
     "icons" : {
         "16" : "img/icon-16.png",
         "48" : "img/icon-48.png",
@@ -12,16 +12,13 @@
     "permissions" : [
         "contextMenus",
         "notifications",
-        "storage",
         "unlimitedStorage",
-        "http://partner.tcgplayer.com/*",
-        "http://mtgjson.com/json/*"
+        "http://partner.tcgplayer.com/*"
     ],
     "background" : {
         "scripts" : [
             "lib/jquery-2.0.3.min.js",
             "lib/jquery.indexeddb-1.0.0.min.js",
-            "js/update.js",
             "js/init.js",
             "js/menu.js",
             "js/oracle.js",

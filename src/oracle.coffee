@@ -1,4 +1,5 @@
 splitRegex = /(.*?)\s?\/\/?\s?(.*)/
+dbVersion = 10
 
 getQueryName = (s) ->
     return s.replace(/Æ/gi, 'AE').replace(/[^\s\w]/gi, '').toUpperCase()
@@ -13,19 +14,9 @@ notify = ->
         }, dfd.resolve
     ).promise()
 
-getVersion = ->
-    $.Deferred((dfd) ->
-        chrome.storage.local.get { version : 1 }, (items) ->
-            dfd.resolve items.version
-    ).promise()
-
 fetchOracle = ->
     $.Deferred((dfd) ->
-        $.ajax({
-            dataType : 'json',
-            url : 'http://mtgjson.com/json/AllSets.json',
-            cache : false
-        }).done (data) -> dfd.resolve data
+        $.getJSON 'oracle.json',  (sets) -> dfd.resolve sets
     ).promise()
 
 processCard = (set, card) ->
@@ -66,27 +57,30 @@ processSet = (set) ->
 storeCard = (card) ->
     this.put(card)
 
-updateDB  = (nid, version, sets) ->
+updateDB  = (nid, sets) ->
     $.indexedDB('oracle', {
-        version : version
+        version : dbVersion
         schema : {
             1 : (transaction) ->
                 transaction.createObjectStore('cards', {
                     autoIncrement : false,
                     keyPath : 'queryname'
                 }).createIndex 'multiverseids', { multiEntry : true }
+            10 : (transaction) -> transaction.objectStore('cards').clear()
         },
         upgrade : (transaction) ->
-            transaction.objectStore('cards').clear()
             cards = {}
             processSet.call cards, set for code, set of sets
             store = transaction.objectStore 'cards'
             storeCard.call store, card for name, card of cards
     }).done -> chrome.notifications.clear nid, $.noop
 
-chrome.storage.onChanged.addListener (changes) ->
-    return unless changes.version? and changes.version.oldValue != changes.version.newValue
-    $.when(notify(), getVersion(), fetchOracle()).done updateDB
+onInstall = (details) ->
+    return unless details.reason == 'install' or details.reason == 'update'
+    $.when(notify(), fetchOracle())
+        .done updateDB
+
+chrome.runtime.onInstalled.addListener(onInstall)
 
 selectSet = (msg, card) ->
     if (msg.multiverseid) then return set for set in card.sets when set.multiverseid == msg.multiverseid
