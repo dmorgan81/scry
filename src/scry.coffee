@@ -1,5 +1,5 @@
 templates = $('<div/>').load(chrome.extension.getURL('template.html'))
-imageUrl = (card) -> "url(\"http://mtgimage.com/multiverseid/#{card.multiverseid}.jpg\")"
+imageUrl = (card) -> "url(\"http://magiccards.info/scans/en/#{card.mci}/#{card.number}.jpg\")"
 
 prices = (card) ->
     $.Deferred((dfd) ->
@@ -63,18 +63,11 @@ content = (card) ->
     oracleConstruct.call other, card.other
     this.find('.scry-oracle').addClass('scry-left').after(other)
 
-replaceSymbols = (mc) ->
-    size = if mc == '{1000000}' then 64 else 16
-    mc = mc.replace /{([0-9wubrghpsxyz\u221E]+)}/ig, "<img src=\"http://mtgimage.com/symbol/mana/$1/#{size}.png\"></img>"
-    mc = mc.replace /{([0-9wubrg])\/([wubrgp])}/ig, '<img src="http://mtgimage.com/symbol/mana/$1$2/16.png"></img>'
-    mc = mc.replace /{([qt])}/ig, '<img src="http://mtgimage.com/symbol/other/$1/16.png"></img>'
-    return mc
-
 replaceText = (text) ->
     text = text.replace /^((?!Choose).+?)\s\u2014\s/gm, '<i>$1</i> \u2014 '
     text = text.replace /\n/g, '<BR/>'
     text = text.replace /(\(.*\))/g, '<i>$1</i>'
-    return replaceSymbols text
+    return text
 
 oracleConstruct = (card) ->
     if !card then card = { power : 2, toughness : 2, type : 'Creature' }
@@ -83,7 +76,6 @@ oracleConstruct = (card) ->
         do (prop, value) =>
             s = this.find ".scry-oracle-#{prop}"
             if (prop == 'text') then value = replaceText value
-            if (prop == 'manaCost') then value = replaceSymbols value
             s.html value
     for prop in [ 'power', 'toughness', 'loyalty', 'artist' ]
         do (prop) => this.find(".scry-oracle-#{prop}").toggle card[prop] != undefined

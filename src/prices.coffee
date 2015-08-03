@@ -1,7 +1,7 @@
-databaseVersion = 8
-partnerKey = 'TEST'
-pricesUrl = (name, set) -> "http://partner.tcgplayer.com/x/phl.asmx/p?pk=#{partnerKey}&p=#{name}&s=#{set}"
-vendorUrl = (name, set) -> "http://partner.tcgplayer.com/x/pv.asmx/p?pk=#{partnerKey}&v=8&p=#{name}&s=#{set}"
+databaseVersion = 9
+partnerKey = 'MAGCINFO'
+pricesUrl = (name, set) -> "http://partner.tcgplayer.com/x3/phl.asmx/p?pk=#{partnerKey}&p=#{name}&s=#{set}"
+vendorUrl = (name, set) -> "http://partner.tcgplayer.com/x3/pv.asmx/p?pk=#{partnerKey}&v=8&p=#{name}&s=#{set}"
 splitName = (names) -> "#{names[0]} // #{names[1]}"
 
 fix = (s) -> s.replace /&(lt|gt);/g, (m, n) -> if n == 'lt' then '<' else '>'

@@ -1,5 +1,5 @@
 splitRegex = /(.*?)\s?\/\/?\s?(.*)/
-dbVersion = 12
+dbVersion = 13
 
 getQueryName = (s) ->
     return s.replace(/Æ/gi, 'AE').replace(/[^\s\w]/gi, '').toUpperCase()
@@ -31,6 +31,7 @@ processCard = (set, card) ->
         multiverseid : card.multiverseid
         number : card.number
         rarity : card.rarity
+        mci : set.magicCardsInfoCode ? set.code.toLowerCase()
         setcode : set.code
         setname : set.name
     }
