@@ -1,0 +1,3 @@
+[submodule "scry-oracle"]
+	path = scry-oracle
+	url = github:Spitemare/scry-oracle
