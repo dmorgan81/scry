@@ -1,5 +1,5 @@
 splitRegex = /(.*?)\s?\/\/?\s?(.*)/
-dbVersion = 13
+dbVersion = 14
 
 getQueryName = (s) ->
     return s.replace(/Æ/gi, 'AE').replace(/[^\s\w]/gi, '').toUpperCase()
@@ -19,46 +19,11 @@ fetchOracle = ->
         $.getJSON 'oracle.json',  (sets) -> dfd.resolve sets
     ).promise()
 
-processCard = (set, card) ->
-    existing = this[card.name] ? {}
-    card.queryname = getQueryName(card.name)
-    card.sets = existing.sets ? []
-    card.sets.unshift {
-        artist : card.artist
-        border : card.border ? set.border
-        flavor : card.flavor
-        image : card.imageName
-        multiverseid : card.multiverseid
-        number : card.number
-        rarity : card.rarity
-        mci : set.magicCardsInfoCode ? set.code.toLowerCase()
-        setcode : set.code
-        setname : set.name
-    }
-    card.multiverseids = existing.multiverseids ? []
-    card.multiverseids.unshift card.multiverseid
-    delete card.artist
-    delete card.border
-    delete card.flavor
-    delete card.foreignNames
-    delete card.imageName
-    delete card.multiverseid
-    delete card.number
-    delete card.originalText
-    delete card.originalType
-    delete card.printings
-    delete card.rarity
-    delete card.variations
-    delete card.watermark
-    this[card.name] = card
-
-processSet = (set) ->
-    processCard.call this, set, card for card in set.cards
-
 storeCard = (card) ->
+    card.queryname = getQueryName(card.name)
     this.put(card)
 
-updateDB  = (nid, sets) ->
+updateDB  = (nid, cards) ->
     $.indexedDB('oracle', {
         version : dbVersion
         schema : {
@@ -67,11 +32,9 @@ updateDB  = (nid, sets) ->
                     autoIncrement : false,
                     keyPath : 'queryname'
                 }).createIndex 'multiverseids', { multiEntry : true }
-            10 : (transaction) -> transaction.objectStore('cards').clear()
+            14 : (transaction) -> transaction.objectStore('cards').clear()
         },
         upgrade : (transaction) ->
-            cards = {}
-            processSet.call cards, set for code, set of sets
             store = transaction.objectStore 'cards'
             storeCard.call store, card for name, card of cards
     }).done -> chrome.notifications.clear nid, $.noop
