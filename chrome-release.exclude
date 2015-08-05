@@ -5,3 +5,4 @@ chrome-release.*
 *.bak
 *.map
 src*
+scry-oracle*
