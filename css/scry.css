@@ -16,6 +16,7 @@
 }
 
 .scry.scry-animating,
+.scry.scry-animating .scry-images,
 .scry.scry-drag {
     background: transparent;
 }
@@ -113,6 +114,7 @@
 }
 
 .scry-images {
+    background-image: url('chrome-extension://__MSG_@@extension_id__/img/cardback.png');
     border: 5px solid;
     box-shadow: -7px 7px 5px 0px rgba(0,0,0,0.5);
     border-radius: 10px;
