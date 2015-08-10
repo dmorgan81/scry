@@ -138,6 +138,20 @@
                 "js/site/channelfireball.js"
             ],
             "run_at" : "document_end"
+        },
+        {
+            "matches" : [
+                "*://*.reddit.com/r/magicTCG/*"
+            ],
+            "css" : [
+                "css/scry.css"
+            ],
+            "js" : [
+                "lib/jquery-2.0.3.min.js",
+                "js/scry.js",
+                "js/site/reddit.js"
+            ],
+            "run_at" : "document_end"
         }
     ],
     "web_accessible_resources" : [
