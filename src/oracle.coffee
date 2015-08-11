@@ -1,5 +1,5 @@
 splitRegex = /(.*?)\s?\/\/?\s?(.*)/
-dbVersion = 14
+dbVersion = 15
 
 getQueryName = (s) ->
     return s.replace(/Æ/gi, 'AE').replace(/[^\s\w]/gi, '').toUpperCase()
@@ -32,7 +32,7 @@ updateDB  = (nid, cards) ->
                     autoIncrement : false,
                     keyPath : 'queryname'
                 }).createIndex 'multiverseids', { multiEntry : true }
-            14 : (transaction) -> transaction.objectStore('cards').clear()
+            15 : (transaction) -> transaction.objectStore('cards').clear()
         },
         upgrade : (transaction) ->
             store = transaction.objectStore 'cards'
